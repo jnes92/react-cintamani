@@ -1,28 +1,30 @@
+import React from 'react'
+
 const ArticleItem = ({ article }) => {
   console.log(article);
-  
+
   return (
     <li>
       {/* <Link as={`/p/${article.sku}`} href={`/article?title=${article.name}`}> */}
       {/* <a> */}
-     <p className="category-header"> {article._category} </p> 
-        <p className="article-header"> {article.name} </p>
-        <p className="article-description"> {article.description} </p>
+      <p>
+        <span> ID: {article.ID} </span>
+        <br />
+        <span> Name: {article.Name} </span>
+        <br />
+
+        <span> Preis: {article.Price} </span>
+        <br />
+
+        <span> Menge: {article.Quantity} </span>
+        <br />
+
+        <span> Images: {article.Images} </span>
+        <br />
+
+      </p>
       {/* </a> */}
       {/* </Link> */}
-      <style jsx>{`
-        .category-header{
-          
-        }
-
-        .article-header{
-
-        }
-
-        .article-description{
-
-        }
-    `}</style>
     </li>
   )
 }
