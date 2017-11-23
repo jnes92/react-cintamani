@@ -4,7 +4,7 @@ import ExcelImporter from "../../api/ExcelImporter"
 
 var assert=chai.assert, expect = chai.expect, should = chai.should();
 
-const actualDataSize = 1;
+const actualDataSize = 2;
 
 
 describe('ExcelImporter', () => {
