@@ -1,4 +1,6 @@
 import React from 'react'
+import cellNames from "../../data/products/productsCellNames";
+
 
 const ArticleItem = ({ article }) => {
   return (
@@ -6,18 +8,19 @@ const ArticleItem = ({ article }) => {
       {/* <Link as={`/p/${article.sku}`} href={`/article?title=${article.name}`}> */}
       {/* <a> */}
       <p>
-        <span> ID: {article.ID} </span>
+        <span> ID: {article[cellNames.ID]} </span>
         <br />
-        <span> Name: {article.Name} </span>
+        <span> Name: {article[cellNames.Name]} </span>
         <br />
-
-        <span> Preis: {article.Price} </span>
+        <span> Category: {article[cellNames.Category]} </span>
         <br />
-
-        <span> Menge: {article.Quantity} </span>
+        <span> Preis: {article[cellNames.Price]} </span>
         <br />
 
-        <span> Images: {article.Images} </span>
+        <span> Menge: {article[cellNames.Quantity]} </span>
+        <br />
+
+        <span> Images: {article[cellNames.Images]} </span>
         <br />
 
       </p>
