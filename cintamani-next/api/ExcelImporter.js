@@ -54,10 +54,6 @@ class ExcelImporter {
         else return false;
     }
 
-    static verifyLineColumn() {
-
-    }
-
     static getFlatCategories(tableObjects) {
         let categories = [];
 
@@ -66,18 +62,32 @@ class ExcelImporter {
             categories.push(activeCategories);
         });
 
-        return _.uniq(categories);
-        // _.sortedUniq([1, 1, 2]);
-        // _.union([arrays])
-
-
+        return _.sortBy(_.uniq(categories));
+        
         // get all by category ?
         // _.partition(users, function(o) { return o.active; });
     }
 
     static getCategories(tableObjects) {
-        let categories = this.getFlatCategories(tableObjects);
+        let categories = [];
+        let flatCategories = this.getFlatCategories(tableObjects);
 
+        flatCategories.forEach(singleCategoryLine => {
+            let catSplit = singleCategoryLine.split("-");
+            let mainCategory = _.trim(catSplit[0]);
+            let sideCategory = (catSplit.length > 1) ? _.trim(catSplit[1]) : "";
+
+            let activeSubTree = _.find(categories, (obj) => { return obj.name == mainCategory }) ;
+            if (!activeSubTree){
+               activeSubTree = { name: mainCategory }   
+               activeSubTree.subCategories = [sideCategory];
+               categories.push(activeSubTree);               
+            } 
+            else {
+                activeSubTree.subCategories.push(sideCategory)
+            }
+        });
+        return (categories);
     }
 
 }

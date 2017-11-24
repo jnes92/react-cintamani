@@ -52,17 +52,15 @@ describe('ExcelImporter', () => {
     it("getCategories() : should get all categories with hierarchy", () => {
 
       let importedData = ExcelImporter.import(testDataPath);
-      let foundCategories = ExcelImporter.getFlatCategories(importedData);
+      let foundCategories = ExcelImporter.getCategories(importedData);
 
-      // Buddhas - Aksobhya
-      // Buddhas - Manjusri
-      // Malas  - klein
-      // Thangkas  - groß
-      // Thangkas  - groß
-      // Thangkas  - klein
+      const expectedOutput = [
+        {name : "Buddhas", subCategories: ["Aksobhya", "Manjusri"]},
+        {name : "Malas", subCategories: ["klein"]},
+        {name : "Thangkas", subCategories: ["groß", "klein"]}
+      ];
 
-
-      foundCategories.should.have.length(100);
+      foundCategories.should.be.deep.equal(expectedOutput);
     });
 
   })
