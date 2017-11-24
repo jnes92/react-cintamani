@@ -1,8 +1,6 @@
 import React from 'react'
 
 const ArticleItem = ({ article }) => {
-  console.log(article);
-
   return (
     <li>
       {/* <Link as={`/p/${article.sku}`} href={`/article?title=${article.name}`}> */}
