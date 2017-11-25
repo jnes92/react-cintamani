@@ -3,7 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunkMiddleware from 'redux-thunk'
 
 import ExcelImporter from "./api/ExcelImporter";
-import cellNames from "./data/products/productsCellNames";
+import cellNames from "./data/productsCellNames";
 import RoutesHelper from "./routesHelper";
 
 const initialState = {

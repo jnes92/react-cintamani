@@ -1,7 +1,7 @@
 import _  from "lodash";
 
 import ExcelImporter from "./api/ExcelImporter";
-import cellNames from "./data/products/productsCellNames";
+import cellNames from "./data/productsCellNames";
 
 
 class RoutesHelper{

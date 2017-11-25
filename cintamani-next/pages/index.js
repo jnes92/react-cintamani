@@ -7,7 +7,7 @@ import Layout from '../components/MyLayout.js'
 
 
 import ExcelImporter from "../api/ExcelImporter";
-import cellNames from "../data/products/productsCellNames";
+import cellNames from "../data/productsCellNames";
 
 
 

@@ -1,10 +1,10 @@
 import XLSX from 'xlsx';
 import _ from "lodash";
 
-import cellNames from "../data/products/productsCellNames";
+import cellNames from "../data/productsCellNames";
 
 class ExcelImporter {
-    static import(path = "data/products/products.xlsx") {
+    static import(path = "data/products.xlsx") {
         let workbook = XLSX.readFile(path);
 
         let first_sheet_name = workbook.SheetNames[0];
