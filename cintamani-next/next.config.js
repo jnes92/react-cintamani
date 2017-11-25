@@ -19,7 +19,11 @@ module.exports = {
     require.extensions['.css'] = () => {
       return;
     };
-    
+
+    require.extensions['.css'] = () => {
+      return;
+    };
+
     config.module.rules.push(
       {
         test: /\.(css|scss)/,
@@ -27,37 +31,26 @@ module.exports = {
         options: {
           name: 'dist/[path][name].[ext]'
         }
-      }
-    ,
+      },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader',
-        include: /flexboxgrid/        
-      }
-    ,
+        use: ['babel-loader', 'raw-loader', 'postcss-loader']
+      },
       {
-        test: /\.s(a|c)ss$/,
+        test: /\.s(a|c)ss$/,        
         use: ['babel-loader', 'raw-loader', 'postcss-loader',
-          { loader: 'sass-loader',
+          {
+            loader: 'sass-loader',
             options: {
-              includePaths: ['styles', 'node_modules']
+              includePaths: ['styles']
                 .map((d) => path.join(__dirname, d))
                 .map((g) => glob.sync(g))
                 .reduce((a, c) => a.concat(c), [])
             }
           }
         ]
-      });
-
-
-
-
-    return config
-  },
-  webpackDevMiddleware: config => {
-    // Perform customizations to webpack dev middleware config
-
-    // Important: return the modified config
-    return config
-  }
+      }
+    );
+  return config
+}
 }

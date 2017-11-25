@@ -1,6 +1,6 @@
 import React from 'react'
 import CategoriesList from './CategoriesList'
-import { Grid, Row, Col } from 'react-flexbox-grid';
+import {Grid, Col, Row} from 'react-styled-flexboxgrid'
 import Head from 'next/head'
 
 import main from "../styles/main.scss"
@@ -15,10 +15,10 @@ const Layout = (props) => {
     </Head>
     <Grid fluid className='main-grid'>
       <Row>
-        <Col xs={0} md={3} lg={2}>
+        <Col xs={0} md={3} lg={2} className="no-padding">
           <CategoriesList categories={props.categories} />
         </Col>
-        <Col xs={12} md={9} lg={10}>
+        <Col xs={12} md={9} lg={10} className="no-padding">
           {props.children}
         </Col>
       </Row>
