@@ -13,3 +13,4 @@ Param
 $slot=$env+"-"+$id;
 
 az webapp deployment slot create --name $appName --resource-group $resGroup --slot $slot
+Write-Output("Please remember to delete slot, after testing");
