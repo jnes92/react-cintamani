@@ -18,19 +18,19 @@ class Home extends React.Component {
 
     render() {
         return (
-            <Layout categories={this.props.categories}>
+            <Layout categories={this.props.categories} >
                 <style>
                     {styles}
                 </style>
-                    <LazyHero
-                        className="hero"
-                        opacity={0}
-                        imageSrc="/static/images/head1_web.jpg">
-                        <div className="text-box">
-                            <em className="text-headline">Buddhas aus Nepal</em>
-                            <h2 className="text-subtitle">seltene Kunstwerke</h2>
-                        </div>
-                    </LazyHero>
+                <LazyHero
+                    className="hero"
+                    opacity={0}
+                    imageSrc="/static/images/head1_web.jpg">
+                    <div className="text-box">
+                        <em className="text-headline">Buddhas aus Nepal</em>
+                        <h2 className="text-subtitle">seltene Kunstwerke</h2>
+                    </div>
+                </LazyHero>
             </Layout>
         )
     }
