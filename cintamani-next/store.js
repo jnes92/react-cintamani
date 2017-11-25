@@ -4,7 +4,7 @@ import thunkMiddleware from 'redux-thunk'
 
 import ExcelImporter from "./api/ExcelImporter";
 import cellNames from "./data/productsCellNames";
-import RoutesHelper from "./routesHelper";
+import RoutesHelper from "./data/routesHelper";
 
 const initialState = {
     products: [],
@@ -36,8 +36,7 @@ export const getProducts = (isServer) => dispatch => {
 
         const dev = process.env.NODE_ENV !== 'production'
         if (dev) {
-            let routesHelper = RoutesHelper.GetDevRoutes();
-            payload.routeList = routesHelper;
+            new RoutesHelper().WriteRoutesToFile("data/routes.json");
         }
         return dispatch({ type: actionTypes.GetAllData, payload })
     }

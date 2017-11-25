@@ -35,5 +35,8 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.5.1",
     "mocha-junit-reporter": "^1.15.0"
+  },
+  "browser": {
+    "fs": false
   }
 }

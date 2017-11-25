@@ -1,5 +1,5 @@
 import React from 'react'
-import cellNames from "../data/products/productsCellNames";
+import cellNames from "../data/productsCellNames";
 
 
 const ProductItem = ({ article }) => {

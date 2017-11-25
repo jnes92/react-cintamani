@@ -9,7 +9,7 @@ import ProductList from '../components/ProductList';
 
 
 import ExcelImporter from "../api/ExcelImporter";
-import cellNames from "../data/products/productsCellNames";
+import cellNames from "../data/productsCellNames";
 
 
 
