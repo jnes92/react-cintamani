@@ -11,8 +11,6 @@ class ExcelImporter {
         let worksheet = workbook.Sheets[first_sheet_name];
         let tableObjects = XLSX.utils.sheet_to_json(worksheet);
 
-
-
         if (this.verifyCompleteData(tableObjects))
             return tableObjects;
         else return [];

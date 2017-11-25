@@ -15,7 +15,6 @@ import cellNames from "../data/products/productsCellNames";
 
 class Category extends React.Component {
     static async getInitialProps(props) {
-        console.log(props);
         const { query: { main, side }, store, isServer } = props;
         store.dispatch(getProducts(isServer))        
         return { route: { main, side } }
