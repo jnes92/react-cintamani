@@ -13,6 +13,7 @@ const initialState = {
 
 
 export const actionTypes = {
+    LoadLocalData : 'LoadLocalData',
     GetAllData: 'GetAllData'
 }
 
@@ -33,6 +34,9 @@ export const getProducts = (isServer) => dispatch => {
         let payload = { products, categories}
         return dispatch({ type: actionTypes.GetAllData, payload })        
     }
+    else         
+    return dispatch({ type: actionTypes.LoadLocalData })        
+    
 }
 
 

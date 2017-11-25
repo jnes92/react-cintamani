@@ -6,23 +6,24 @@
   "dependencies": {
     "chai": "^4.1.2",
     "eslint": "^4.11.0",
+    "express": "^4.16.2",
     "global": "^4.3.2",
     "lodash": "^4.17.4",
     "mocha": "^4.0.1",
     "next": "^4.1.4",
+    "next-redux-wrapper": "^1.0.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
-    "xlsx": "^0.11.10",
-    "next-redux-wrapper": "^1.0.0",
-    "redux-devtools-extension": "^2.13.2",
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.1.0"
+    "redux-devtools-extension": "^2.13.2",
+    "redux-thunk": "^2.1.0",
+    "xlsx": "^0.11.10"
   },
   "scripts": {
     "test": "mocha  --require babel-register --reporter spec test/ --recursive",
     "test-vsts": "./node_modules/.bin/mocha --require babel-register --recursive --reporter mocha-junit-reporter --reporter-options mochaFile=./test-output/test-results.xml",
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build",
     "start": "next start",
     "export": "next build && next export -o dist"
