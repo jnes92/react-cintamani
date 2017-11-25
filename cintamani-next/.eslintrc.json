@@ -20,5 +20,5 @@
         "constructor-super": "warn",
         "valid-typeof": "warn"
     },
-    "extends": "airbnb"
+    // "extends": "airbnb"
 }

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import ProductItem from './ProductItem';
-import cellNames from "../data/products/productsCellNames";
+import cellNames from "../data/productsCellNames";
 
 
 const ProductsList = ({ products }) => {

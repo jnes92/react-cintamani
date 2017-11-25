@@ -7,7 +7,7 @@ import Layout from '../components/MyLayout.js'
 
 
 import ExcelImporter from "../api/ExcelImporter";
-import cellNames from "../data/products/productsCellNames";
+import cellNames from "../data/productsCellNames";
 
 
 
@@ -20,23 +20,14 @@ class Home extends React.Component {
         return (
             <Layout categories={this.props.categories}>
                 <h1>My Shop</h1>
-                {this.props.routeList ?
-                    <div>
-                        <h3> Developer Only </h3>
-                        <span> Dont forget to add this to next.config.js </span>
-                        <div>
-                            {JSON.stringify(this.props.routeList)}
-                        </div>
-                    </div> : <div></div>}
             </Layout>
         )
     }
 }
-const mapStateToProps = ({ products, categories, routeList }) => {
+const mapStateToProps = ({ products, categories }) => {
     return {
         products,
-        categories,
-        routeList
+        categories
     }
 }
 

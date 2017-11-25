@@ -5,7 +5,7 @@ import { initStore, getProducts } from '../store'
 import _ from "lodash";
 
 import Layout from '../components/MyLayout.js'
-import ProductList from '../components/ProductList';
+import ProductDetails from '../components/ProductDetails';
 
 
 import ExcelImporter from "../api/ExcelImporter";
@@ -13,28 +13,29 @@ import cellNames from "../data/productsCellNames";
 
 
 
-class Category extends React.Component {
+class Product extends React.Component {
     static async getInitialProps(props) {
-        const { query: { main, side }, store, isServer } = props;
+        const { query: { id }, store, isServer } = props;
         store.dispatch(getProducts(isServer))
-        return { route: { main, side } }
+        return { route: { id } }
     }
 
     render() {
-        const { main, side } = this.props.route;
-        const filteredProducts = _.filter(this.props.products, (item) => {
-            let isMainCat = item[cellNames.Category].includes(main);
-            let isSideCat = item[cellNames.Category].includes(side);
-            if (isMainCat && isSideCat)
+        const { id } = this.props.route;
+        const chosenProduct = _.first(_.filter(this.props.products, (item) => {
+            if (item[cellNames.ID] == id.toString())
                 return item;
-        });
+        }));
+        
+        const mainCategory = _.trim(chosenProduct[cellNames.Category].split("-")[0]);
+        const sideCategory = _.trim(chosenProduct[cellNames.Category].split("-")[1]);
 
         return (
             <Layout categories={this.props.categories}>
                 <div>
-                    <span> {main} > {side} </span>
+                    <span> {mainCategory} > {sideCategory} </span>
                 </div>
-                <ProductList products={filteredProducts} />
+                <ProductDetails product={chosenProduct} />
             </Layout>
         )
 
@@ -53,4 +54,4 @@ const mapDispatchToProps = (dispatch) => {
         getProducts: bindActionCreators(getProducts, dispatch),
     }
 }
-export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(Category)
+export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(Product)

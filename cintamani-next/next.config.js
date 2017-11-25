@@ -1,10 +1,15 @@
+const pathToRoutes = "./data/routes.json";
+
 module.exports = {
   exportPathMap: function () {
-    let routes = {
-      '/': { page: '/' },
+    var fs = require('fs')
+
+    try {
+      var data = fs.readFileSync(pathToRoutes, 'utf8');
+      let convertedRoutes = JSON.parse(data);
+      return convertedRoutes;
+    } catch (e) {
+      console.log('Error:', e.stack);
     }
-    let routesJSON = '{"/":{"page":"/"},"/Buddhas/Aksobhya":{"page":"/category","query":{"main":"Buddhas","side":"Aksobhya"}},"/Buddhas/Manjusri":{"page":"/category","query":{"main":"Buddhas","side":"Manjusri"}},"/Malas/klein":{"page":"/category","query":{"main":"Malas","side":"klein"}},"/Thangkas/groß":{"page":"/category","query":{"main":"Thangkas","side":"groß"}},"/Thangkas/klein":{"page":"/category","query":{"main":"Thangkas","side":"klein"}}}';
-    let convertedRoutes = JSON.parse(routesJSON);
-    return convertedRoutes;
   }
 }

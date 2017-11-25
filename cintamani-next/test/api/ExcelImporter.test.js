@@ -6,7 +6,7 @@ var assert = chai.assert, expect = chai.expect, should = chai.should();
 
 const actualDataSize = 6;
 const actualUniqueGroups = 5;
-const testDataPath = "data/products/products_test.xlsx";
+const testDataPath = "./test/data/products_test.xlsx";
 
 describe('ExcelImporter', () => {
   describe('import products.xlsx', () => {
@@ -33,7 +33,7 @@ describe('ExcelImporter', () => {
     });
 
     it("should not import, if duplicates", () => {
-      const testDataDuplicates = "data/products/products_test_duplicates.xlsx";
+      const testDataDuplicates = "./test/data/products_test_duplicates.xlsx";
 
       let importedData = ExcelImporter.import(testDataDuplicates);
       importedData.should.have.length(0);
