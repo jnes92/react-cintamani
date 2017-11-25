@@ -1,8 +1,8 @@
 import React from 'react'
-import cellNames from "../../data/products/productsCellNames";
+import cellNames from "../data/products/productsCellNames";
 
 
-const ArticleItem = ({ article }) => {
+const ProductItem = ({ article }) => {
   return (
     <li>
       {/* <Link as={`/p/${article.sku}`} href={`/article?title=${article.name}`}> */}
@@ -30,4 +30,4 @@ const ArticleItem = ({ article }) => {
   )
 }
 
-export default ArticleItem;
+export default ProductItem;

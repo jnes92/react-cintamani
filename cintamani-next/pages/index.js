@@ -1,40 +1,42 @@
 import React from 'react'
-
+import { bindActionCreators } from 'redux'
+import { initStore, getProducts } from '../store'
+import withRedux from 'next-redux-wrapper'
 
 import Layout from '../components/MyLayout.js'
-import Link from 'next/link'
 
-import ArticleItem from '../components/Articles/ArticleItem';
 
 import ExcelImporter from "../api/ExcelImporter";
 import cellNames from "../data/products/productsCellNames";
-let test = "../data/products/products_test_duplicates.xlsx";
+
 
 
 class Home extends React.Component {
-    static async getInitialProps() {
-        let excelProducts = ExcelImporter.import();
-        let categories = ExcelImporter.getCategories(excelProducts);
-        return { excelProducts, categories }
+    static getInitialProps({ store, isServer }) {
+        store.dispatch(getProducts(isServer))
     }
 
     render() {
         return (
             <Layout categories={this.props.categories}>
                 <h1>My Shop</h1>
-                <ul>
-                    {this.props.excelProducts ?
-                        this.props.excelProducts.map((product, index) => (
-                            <ArticleItem key={product[cellNames.ID]} article={product} />
-                        ))
-                        : (<div> Imported dataset is wrong </div>)
-                    }
-                </ul>
             </Layout>
         )
 
 
     }
 }
+const mapStateToProps = ({ products, categories }) => {
+    return {
+        products,
+        categories
+    }
+}
 
-export default Home
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getProducts: bindActionCreators(getProducts, dispatch),
+    }
+}
+
+export default withRedux(initStore, mapStateToProps,mapDispatchToProps)(Home)
