@@ -1,31 +1,31 @@
 import React from 'react'
 import cellNames from "../data/productsCellNames";
+import _ from "lodash";
+import Link from 'next/link'
 
 
 const ProductItem = ({ article }) => {
+
+  const mainCategory = _.trim(article[cellNames.Category].split("-")[0]);
+  const sideCategory = _.trim(article[cellNames.Category].split("-")[1]);
+
   return (
     <li>
-      {/* <Link as={`/p/${article.sku}`} href={`/article?title=${article.name}`}> */}
-      {/* <a> */}
-      <p>
-        <span> ID: {article[cellNames.ID]} </span>
-        <br />
-        <span> Name: {article[cellNames.Name]} </span>
-        <br />
-        <span> Category: {article[cellNames.Category]} </span>
-        <br />
-        <span> Preis: {article[cellNames.Price]} </span>
-        <br />
-
-        <span> Menge: {article[cellNames.Quantity]} </span>
-        <br />
-
-        <span> Images: {article[cellNames.Images]} </span>
-        <br />
-
-      </p>
-      {/* </a> */}
-      {/* </Link> */}
+      <Link
+        key={"categoriesList_" + mainCategory + "_" + sideCategory+"_"+article[cellNames.ID]}
+        as={`/${mainCategory}/${sideCategory}/${article[cellNames.ID]}`}
+        href={`/product?id=${article[cellNames.ID]}`}>
+        <a>
+          <p>
+            <span> Name: {article[cellNames.Name]} </span>
+            <br />
+            <span> Preis: {article[cellNames.Price]} </span>
+            <br />
+            <span> Images: {article[cellNames.Images]} </span>
+            <br />
+          </p>
+        </a>
+      </Link>
     </li>
   )
 }

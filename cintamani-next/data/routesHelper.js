@@ -33,7 +33,6 @@ class RoutesHelper {
 
   WriteRoutesToFile(filename, routes = this.routes) {
     const content = JSON.stringify(routes);
-    console.log(content);
     const path = filename;
     var fs = require('fs');
 
