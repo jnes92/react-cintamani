@@ -5,3 +5,4 @@ out/
 test-output/
 
 routes.json
+data/products_db.xlsx
