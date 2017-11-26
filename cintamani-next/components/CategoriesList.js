@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-import menuStyle from "../styles/menu.scss";
+
 
 class CategoriesList extends React.Component {
     constructor(props) {
@@ -24,7 +24,7 @@ class CategoriesList extends React.Component {
         const { categories } = this.props;
         if (!categories) return (<div> Please import categories </div>);
         return (
-                <div className="sidebar">
+                <aside className="sidebar" style={{width:"100%"}}>
                     <div id="leftside-navigation" className="nano">
                         <ul className="nano-content">
                             <li>
@@ -62,8 +62,7 @@ class CategoriesList extends React.Component {
                             })}
                         </ul>
                     </div>
-                    <style> {menuStyle} </style>
-                </div>
+                </aside>
         )
     }
 }
