@@ -56,7 +56,7 @@ class RoutesHelper {
       if (err) {
         return console.log(err);
       }
-      callback();
+      if (callback) callback();
     });
   }
 
