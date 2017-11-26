@@ -3,14 +3,17 @@ import withRedux from 'next-redux-wrapper'
 import { bindActionCreators } from 'redux'
 import { initStore, getProducts } from '../store'
 import _ from "lodash";
+import { Grid, Col, Row } from 'react-styled-flexboxgrid'
+
 
 import Layout from '../components/MyLayout.js'
-import ProductList from '../components/ProductList';
+import ProductItem from '../components/ProductItem';
 
 
 import ExcelImporter from "../api/ExcelImporter";
 import cellNames from "../data/productsCellNames";
 
+import productStyles from "../styles/category.css"
 
 
 class Category extends React.Component {
@@ -31,10 +34,22 @@ class Category extends React.Component {
 
         return (
             <Layout categories={this.props.categories}>
+                <style> {productStyles} </style>
                 <div>
                     <span> {main} > {side} </span>
                 </div>
-                <ProductList products={filteredProducts} />
+                <Grid fluid>
+                    <Row xs md lg>
+                        {filteredProducts ?
+                            filteredProducts.map((product, index) => (
+                                <Col key={product[cellNames.ID]} xs={12} md={6} lg={3}>
+                                    <ProductItem article={product} />
+                                </Col>
+                            ))
+                            : (<div> Imported dataset is wrong </div>)
+                        }
+                    </Row>
+                </Grid>
             </Layout>
         )
 
