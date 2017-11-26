@@ -1,12 +1,14 @@
 import chai from "chai";
 
 import ExcelImporter from "../../api/ExcelImporter"
+import RoutesHelper from "../../data/routesHelper";
 
 var assert = chai.assert, expect = chai.expect, should = chai.should();
 
 const actualDataSize = 6;
 const actualUniqueGroups = 5;
 const testDataPath = "./test/data/products_test.xlsx";
+
 
 describe('ExcelImporter', () => {
   describe('import products.xlsx', () => {
@@ -55,9 +57,9 @@ describe('ExcelImporter', () => {
       let foundCategories = ExcelImporter.getCategories(importedData);
 
       const expectedOutput = [
-        {name : "Buddhas", subCategories: ["Aksobhya", "Manjusri"]},
-        {name : "Malas", subCategories: ["klein"]},
-        {name : "Thangkas", subCategories: ["groß", "klein"]}
+        { name: "Buddhas", subCategories: ["Aksobhya", "Manjusri"] },
+        { name: "Malas", subCategories: ["klein"] },
+        { name: "Thangkas", subCategories: ["groß", "klein"] }
       ];
 
       foundCategories.should.be.deep.equal(expectedOutput);
@@ -74,38 +76,68 @@ describe('ExcelImporter', () => {
     describe("Live data should have filled required fields", () => {
       let tableObjectTestData;
       beforeEach(() => {
-       tableObjectTestData =
-        {
-          __rowNum__: 1, ID: "1", Category: "Buddhas - Aksobhya",
-          Description: "Beschreibung", Images: "asd.jpg", Name: "Test",
-          Price: "10", Quantity: "1"
-        }
+        tableObjectTestData =
+          {
+            __rowNum__: 1, ID: "1", Category: "Buddhas - Aksobhya",
+            Description: "Beschreibung", Images: "asd.jpg", Name: "Test",
+            Price: "10", Quantity: "1"
+          }
       })
-      
+
       it("Should be true if row is fine", () => {
-        ExcelImporter.verifyLine(tableObjectTestData, 0,true).should.be.true;        
+        ExcelImporter.verifyLine(tableObjectTestData, 0, true).should.be.true;
       })
-      
+
       it("Should check for missing ID", () => {
-        tableObjectTestData.ID="";
-        ExcelImporter.verifyLine(tableObjectTestData, 0,true).should.be.false;                
+        tableObjectTestData.ID = "";
+        ExcelImporter.verifyLine(tableObjectTestData, 0, true).should.be.false;
       })
 
       it("Should check for missing Category", () => {
-        tableObjectTestData.Category="";
-        ExcelImporter.verifyLine(tableObjectTestData, 0,true).should.be.false;                
+        tableObjectTestData.Category = "";
+        ExcelImporter.verifyLine(tableObjectTestData, 0, true).should.be.false;
       })
 
       it("Should check for missing Name", () => {
-        tableObjectTestData.Name="";
-        ExcelImporter.verifyLine(tableObjectTestData, 0,true).should.be.false;                
+        tableObjectTestData.Name = "";
+        ExcelImporter.verifyLine(tableObjectTestData, 0, true).should.be.false;
       })
 
       it("Should check for missing Price", () => {
-        tableObjectTestData.Price="";
-        ExcelImporter.verifyLine(tableObjectTestData, 0,true).should.be.false;                
+        tableObjectTestData.Price = "";
+        ExcelImporter.verifyLine(tableObjectTestData, 0, true).should.be.false;
       })
+
+      it("Should have routes for live system", () => {
+        let pathToRoutes = "./data/routes.json";
+        readRoutes(pathToRoutes);
+      });
 
     });
   })
-}); 
+});
+
+function createRoutes(path) {
+  var fs = require('fs')
+  
+  try {
+    let readRoutes = RoutesHelper.GetDevRoutes();
+    new RoutesHelper().WriteRoutesToFile(path, readRoutes);
+  } catch (e) {
+    console.warn("createRoutesError:" + e);
+    expect(true).to.be.false;
+  }
+
+}
+
+function readRoutes(path) {
+  var fs = require('fs')
+  
+  try {
+    var routes = fs.readFileSync(path, 'utf8');
+    expect(routes).to.exist;
+
+  } catch (e) {
+    createRoutes(path);
+  }
+}

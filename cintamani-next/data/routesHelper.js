@@ -47,7 +47,7 @@ class RoutesHelper {
     return routes;
   }
 
-  WriteRoutesToFile(filename, routes = this.routes) {
+  WriteRoutesToFile(filename, routes = this.routes, callback) {
     const content = JSON.stringify(routes);
     const path = filename;
     var fs = require('fs');
@@ -56,8 +56,7 @@ class RoutesHelper {
       if (err) {
         return console.log(err);
       }
-
-      console.log("Updated routes.js");
+      callback();
     });
   }
 
