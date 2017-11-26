@@ -30,11 +30,12 @@ export const reducer = (state = initialState, action) => {
 // ACTIONS
 export const getProducts = (isServer) => dispatch => {
     if (isServer) {
-        const products = ExcelImporter.import();
+        const dev = process.env.NODE_ENV !== 'production'     
+        let path = dev? "data/products.xlsx" :"data/products_db.xlsx";
+        let products = ExcelImporter.import(path);
         const categories = ExcelImporter.getCategories(products);
         let payload = { products, categories }
 
-        const dev = process.env.NODE_ENV !== 'production'
         if (dev) {
             new RoutesHelper().WriteRoutesToFile("data/routes.json");
         }

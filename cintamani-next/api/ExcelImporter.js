@@ -6,7 +6,10 @@ import cellNames from "../data/productsCellNames";
 class ExcelImporter {
     static import(path = "data/products.xlsx") {
         let workbook = XLSX.readFile(path);
+        return this.convert(workbook);
+    }
 
+    static convert(workbook) {
         let first_sheet_name = workbook.SheetNames[0];
         let worksheet = workbook.Sheets[first_sheet_name];
         let tableObjects = XLSX.utils.sheet_to_json(worksheet);
@@ -14,6 +17,32 @@ class ExcelImporter {
         if (this.verifyCompleteData(tableObjects))
             return tableObjects;
         else return [];
+    }
+
+    static saveDropboxFile(data,callback) {
+        var fs = require('fs');
+        var path = "data/products_db.xlsx";
+        try {
+            fs.writeFile(path, data,'binary', function (err) {
+                if (err) {
+                    return console.log(err);
+                }
+                if (callback) callback();
+            });
+        } catch (e) {
+            console.warn("createRoutesError:" + e);
+            expect(true).to.be.false;
+        }
+    }
+
+    static importDropbox(callback) {
+        var Dropbox = require('dropbox');
+        var dbx = new Dropbox({ accessToken: 'MYYp9clMLBIAAAAAAAALSk6hF4_cib45bGn3Tr5j84BzAms8t9Srkycin7V5pLDh' });
+        let dropboxPath = '/Develop/cintamani/products.xlsx';
+        let file = dbx.filesDownload({ path: dropboxPath })
+        file.then((data) => {
+            this.saveDropboxFile(data.fileBinary,callback);
+        });
     }
 
     static verifyCompleteData(tableObjects) {
@@ -54,14 +83,14 @@ class ExcelImporter {
 
     static getFlatCategories(tableObjects) {
         let categories = [];
-
-        tableObjects.forEach(product => {
-            let activeCategories = product[cellNames.Category];
-            categories.push(activeCategories);
-        });
+        if (tableObjects)
+            tableObjects.forEach(product => {
+                let activeCategories = product[cellNames.Category];
+                categories.push(activeCategories);
+            });
 
         return _.sortBy(_.uniq(categories));
-        
+
         // get all by category ?
         // _.partition(users, function(o) { return o.active; });
     }
@@ -75,12 +104,12 @@ class ExcelImporter {
             let mainCategory = _.trim(catSplit[0]);
             let sideCategory = (catSplit.length > 1) ? _.trim(catSplit[1]) : "";
 
-            let activeSubTree = _.find(categories, (obj) => { return obj.name == mainCategory }) ;
-            if (!activeSubTree){
-               activeSubTree = { name: mainCategory }   
-               activeSubTree.subCategories = [sideCategory];
-               categories.push(activeSubTree);               
-            } 
+            let activeSubTree = _.find(categories, (obj) => { return obj.name == mainCategory });
+            if (!activeSubTree) {
+                activeSubTree = { name: mainCategory }
+                activeSubTree.subCategories = [sideCategory];
+                categories.push(activeSubTree);
+            }
             else {
                 activeSubTree.subCategories.push(sideCategory)
             }

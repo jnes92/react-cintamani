@@ -110,7 +110,11 @@ describe('ExcelImporter', () => {
 
       it("Should have routes for live system", () => {
         let pathToRoutes = "./data/routes.json";
-        readRoutes(pathToRoutes);
+        readFile(pathToRoutes,'utf8',true);
+      });
+
+      it("Should get data from dropbox folder", () => {
+        ExcelImporter.importDropbox(() => readFile("./data/products_db.xlsx"));
       });
 
     });
@@ -121,8 +125,8 @@ function createRoutes(path) {
   var fs = require('fs')
   
   try {
-    let readRoutes = RoutesHelper.GetDevRoutes();
-    new RoutesHelper().WriteRoutesToFile(path, readRoutes);
+    let readFile = RoutesHelper.GetDevRoutes();
+    new RoutesHelper().WriteRoutesToFile(path, readFile);
   } catch (e) {
     console.warn("createRoutesError:" + e);
     expect(true).to.be.false;
@@ -130,14 +134,15 @@ function createRoutes(path) {
 
 }
 
-function readRoutes(path) {
+function readFile(path,format,routes) {
   var fs = require('fs')
   
   try {
-    var routes = fs.readFileSync(path, 'utf8');
+    var routes = fs.readFileSync(path, format);
     expect(routes).to.exist;
 
   } catch (e) {
+    if (routes)
     createRoutes(path);
   }
 }
