@@ -115,7 +115,7 @@ describe('ExcelImporter', () => {
           (success) => {
             expect(success).to.exist;
           }, (error) => {
-            let readFile = RoutesHelper.GetDevRoutes();
+            let readFile = RoutesHelper.GetRoutes();
 
             RoutesHelper.SaveRoutes(pathToRoutes, readFile, () => {
               FileManager.ReadFile(pathToRoutes, 'utf8',
