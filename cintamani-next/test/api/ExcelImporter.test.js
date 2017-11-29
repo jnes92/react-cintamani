@@ -1,6 +1,7 @@
 import chai from "chai";
 
 import ExcelImporter from "../../api/ExcelImporter"
+import FileManager from "../../api/FileManager"
 import RoutesHelper from "../../data/routesHelper";
 
 var assert = chai.assert, expect = chai.expect, should = chai.should();
@@ -14,7 +15,7 @@ describe('ExcelImporter', () => {
   describe('import products.xlsx', () => {
     it("import should be static function", () => {
 
-      let importedData = ExcelImporter.import(testDataPath);
+      let importedData = ExcelImporter.import(testDataPath,true);
       importedData.should.be.a("array");
 
       assert.equal(importedData.length, actualDataSize, "Imported all rows of data");
@@ -30,14 +31,14 @@ describe('ExcelImporter', () => {
 
     it("import defaultData if no args", () => {
 
-      let importedData = ExcelImporter.import();
+      let importedData = ExcelImporter.import(undefined, true);
       importedData.should.be.a("array");
     });
 
     it("should not import, if duplicates", () => {
       const testDataDuplicates = "./test/data/products_test_duplicates.xlsx";
 
-      let importedData = ExcelImporter.import(testDataDuplicates);
+      let importedData = ExcelImporter.import(testDataDuplicates,true);
       importedData.should.have.length(0);
     });
   });
@@ -69,7 +70,7 @@ describe('ExcelImporter', () => {
 
   describe('Verify Live Data()', () => {
     it("Live data should have no duplicates", () => {
-      let importedData = ExcelImporter.import();
+      let importedData = ExcelImporter.import(undefined, true);
       importedData.should.have.length.greaterThan(0);
     });
 
@@ -110,7 +111,21 @@ describe('ExcelImporter', () => {
 
       it("Should have routes for live system", () => {
         let pathToRoutes = "./data/routes.json";
-        readFile(pathToRoutes,'utf8',true);
+        FileManager.ReadFile(pathToRoutes, 'utf8',
+          (success) => {
+            expect(success).to.exist;
+          }, (error) => {
+            let readFile = RoutesHelper.GetDevRoutes();
+
+            RoutesHelper.SaveRoutes(pathToRoutes, readFile, () => {
+              FileManager.ReadFile(pathToRoutes, 'utf8',
+                (success) => {
+                  expect(success).to.exist;
+                }, (error) => {
+                  true.should.be.false;
+                }, true);
+            });
+          }, true);
       });
 
       it("Should get data from dropbox folder", () => {
@@ -120,29 +135,3 @@ describe('ExcelImporter', () => {
     });
   })
 });
-
-function createRoutes(path) {
-  var fs = require('fs')
-  
-  try {
-    let readFile = RoutesHelper.GetDevRoutes();
-    new RoutesHelper().WriteRoutesToFile(path, readFile);
-  } catch (e) {
-    console.warn("createRoutesError:" + e);
-    expect(true).to.be.false;
-  }
-
-}
-
-function readFile(path,format,routes) {
-  var fs = require('fs')
-  
-  try {
-    var routes = fs.readFileSync(path, format);
-    expect(routes).to.exist;
-
-  } catch (e) {
-    if (routes)
-    createRoutes(path);
-  }
-}
