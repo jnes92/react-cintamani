@@ -115,9 +115,7 @@ describe('ExcelImporter', () => {
           (success) => {
             expect(success).to.exist;
           }, (error) => {
-            let readFile = RoutesHelper.GetRoutes();
-
-            RoutesHelper.SaveRoutes(pathToRoutes, readFile, () => {
+            RoutesHelper.SaveRoutes(pathToRoutes, () => {
               FileManager.ReadFile(pathToRoutes, 'utf8',
                 (success) => {
                   expect(success).to.exist;
@@ -129,7 +127,7 @@ describe('ExcelImporter', () => {
       });
 
       it("Should get data from dropbox folder", () => {
-        ExcelImporter.importDropbox(() => readFile("./data/products_db.xlsx"));
+        ExcelImporter.importDropbox(() => console.log("Dropbox imported"));
       });
 
     });
