@@ -2,57 +2,51 @@ import XLSX from 'xlsx';
 import _ from "lodash";
 
 import cellNames from "../data/productsCellNames";
+import FileManager from "./FileManager"
 
 class ExcelImporter {
-    static import(path = "data/products.xlsx") {
-        let workbook = XLSX.readFile(path);
-        return this.convert(workbook);
+    static locPath = './data/products.xlsx';
+    static dbLocalPath = './data/products-db.xlsx';
+    static dbPath = '/Develop/cintamani/products.xlsx';
+
+    static LoadData(){
+        let dev = process.env.NODE_ENV !== 'production' 
+        if (FileManager.isDropboxEnabled) 
+        this.importDropbox(() => {
+            return this.import(path);
+        });
+        let path = dev? "data/products.xlsx" :"data/products-db.xlsx";
+
+        return this.import(path);
     }
 
-    static convert(workbook) {
+    static import(path = "data/products.xlsx", testFlag = false) {
+        let workbook = XLSX.readFile(path);
+        return this.convert(workbook,testFlag);
+    }
+
+    static convert(workbook, testFlag = false) {
         let first_sheet_name = workbook.SheetNames[0];
         let worksheet = workbook.Sheets[first_sheet_name];
         let tableObjects = XLSX.utils.sheet_to_json(worksheet);
 
-        if (this.verifyCompleteData(tableObjects))
+        if (this.verifyCompleteData(tableObjects, testFlag))
             return tableObjects;
         else return [];
     }
 
-    static saveDropboxFile(data,callback) {
-        var fs = require('fs');
-        var path = "data/products_db.xlsx";
-        try {
-            fs.writeFile(path, data,'binary', function (err) {
-                if (err) {
-                    return console.log(err);
-                }
-                if (callback) callback();
-            });
-        } catch (e) {
-            console.warn("createRoutesError:" + e);
-            expect(true).to.be.false;
-        }
-    }
-
     static importDropbox(callback) {
-        var Dropbox = require('dropbox');
-        var dbx = new Dropbox({ accessToken: 'MYYp9clMLBIAAAAAAAALSk6hF4_cib45bGn3Tr5j84BzAms8t9Srkycin7V5pLDh' });
-        let dropboxPath = '/Develop/cintamani/products.xlsx';
-        let file = dbx.filesDownload({ path: dropboxPath })
-        file.then((data) => {
-            this.saveDropboxFile(data.fileBinary,callback);
-        });
+        FileManager.DownloadFile(this.dbPath, this.dbLocalPath, callback);
     }
 
-    static verifyCompleteData(tableObjects) {
+    static verifyCompleteData(tableObjects, testFlag = false) {
         // check for duplicates.
         let importedRows = tableObjects.length;
         let uniqRows = _.uniqBy(tableObjects, cellNames.ID).length;
         let noDuplicateData = importedRows == uniqRows;
 
         let diff = _.difference(tableObjects, _.uniqBy(tableObjects, cellNames.ID));
-        if (diff.length > 0)
+        if (diff.length > 0 && !testFlag)
             console.error("Error, found duplicate ID: " + _.first(diff)[cellNames.ID]);
 
         let noMissingFields = true;
@@ -90,9 +84,6 @@ class ExcelImporter {
             });
 
         return _.sortBy(_.uniq(categories));
-
-        // get all by category ?
-        // _.partition(users, function(o) { return o.active; });
     }
 
     static getCategories(tableObjects) {

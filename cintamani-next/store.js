@@ -9,7 +9,6 @@ import RoutesHelper from "./data/routesHelper";
 const initialState = {
     products: [],
     categories: [],
-    routeList: {}
 }
 
 export const actionTypes = {
@@ -30,16 +29,14 @@ export const reducer = (state = initialState, action) => {
 // ACTIONS
 export const getProducts = (isServer) => dispatch => {
     if (isServer) {
-        const dev = process.env.NODE_ENV !== 'production'     
-        let path = dev? "data/products.xlsx" :"data/products_db.xlsx";
-        let products = ExcelImporter.import(path);
-        const categories = ExcelImporter.getCategories(products);
-        let payload = { products, categories }
-
-        if (dev) {
-            new RoutesHelper().WriteRoutesToFile("data/routes.json");
+        let products = ExcelImporter.LoadData();
+        if (products){
+            const categories = ExcelImporter.getCategories(products);
+            let payload = { products, categories }
+            RoutesHelper.SaveRoutes("./data/routes.json");
+            return dispatch({ type: actionTypes.GetAllData, payload })
         }
-        return dispatch({ type: actionTypes.GetAllData, payload })
+
     }
     else
         return dispatch({ type: actionTypes.LoadLocalData })

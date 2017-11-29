@@ -1,5 +1,6 @@
 import _ from "lodash";
 
+import FileManager from "../api/FileManager"
 import ExcelImporter from "../api/ExcelImporter";
 import cellNames from "./productsCellNames";
 
@@ -7,12 +8,8 @@ import cellNames from "./productsCellNames";
 Should be called only by server once !!
 */
 class RoutesHelper {
-  routes;
-  constructor() {
-    this.routes = RoutesHelper.GetDevRoutes();
-  }
-  static GetDevRoutes() {
-    const importedProducts = ExcelImporter.import();
+  static GetRoutes() {
+    const importedProducts = ExcelImporter.LoadData();
     const flatCategories = ExcelImporter.getFlatCategories(importedProducts);
 
     // Get Home, Static Routes: index.js
@@ -47,17 +44,13 @@ class RoutesHelper {
     return routes;
   }
 
-  WriteRoutesToFile(filename, routes = this.routes, callback) {
+  static SaveRoutes(filename, callback) {
+    let routes = RoutesHelper.GetRoutes();
     const content = JSON.stringify(routes);
-    const path = filename;
-    var fs = require('fs');
 
-    fs.writeFile(path, content, 'utf8', function (err) {
-      if (err) {
-        return console.log(err);
-      }
-      if (callback) callback();
-    });
+    FileManager.WriteFile(content, filename, 'utf8', callback, () => {
+      return console.log(err);      
+    })
   }
 
 }
