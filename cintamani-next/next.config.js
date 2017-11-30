@@ -1,6 +1,7 @@
 const pathToRoutes = "./data/routes.json";
 const path = require('path')
 const glob = require('glob')
+const webpack = require('webpack');
 
 module.exports = {
   exportPathMap: function () {
@@ -37,7 +38,7 @@ module.exports = {
         use: ['babel-loader', 'raw-loader', 'postcss-loader']
       },
       {
-        test: /\.s(a|c)ss$/,        
+        test: /\.s(a|c)ss$/,
         use: ['babel-loader', 'raw-loader', 'postcss-loader',
           {
             loader: 'sass-loader',
@@ -51,6 +52,13 @@ module.exports = {
         ]
       }
     );
-  return config
-}
+
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      })
+    );
+
+    return config
+  }
 }

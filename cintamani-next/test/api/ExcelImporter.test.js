@@ -13,16 +13,7 @@ const testDataPath = "./test/data/products_test.xlsx";
 
 describe('ExcelImporter', () => {
   describe('import products.xlsx', () => {
-    it("import should be static function", () => {
-
-      let importedData = ExcelImporter.import(testDataPath,true);
-      importedData.should.be.a("array");
-
-      assert.equal(importedData.length, actualDataSize, "Imported all rows of data");
-    });
-
     it("import(path) " + actualDataSize + " products", () => {
-
       let importedData = ExcelImporter.import(testDataPath);
       importedData.should.be.a("array");
 
@@ -30,8 +21,7 @@ describe('ExcelImporter', () => {
     });
 
     it("import defaultData if no args", () => {
-
-      let importedData = ExcelImporter.import(undefined, true);
+      let importedData = ExcelImporter.LoadData();
       importedData.should.be.a("array");
     });
 
@@ -70,7 +60,7 @@ describe('ExcelImporter', () => {
 
   describe('Verify Live Data()', () => {
     it("Live data should have no duplicates", () => {
-      let importedData = ExcelImporter.import(undefined, true);
+      let importedData = ExcelImporter.LoadData();
       importedData.should.have.length.greaterThan(0);
     });
 
