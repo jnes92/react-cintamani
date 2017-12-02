@@ -25,7 +25,7 @@ class ProductDetails extends React.Component {
   render() {
     const { product } = this.props;
     const displayImageList = this.state.images.map((imgPath) => 
-        <Col xs={6} md={4} lg={3}>
+        <Col xs={6} md={4} lg={3} key={"imageGallery"+imgPath}>
           <a onClick={() => this.setActiveImage(imgPath)}>
             <img className="img img-responsive" src={imgPath} style={{ maxWidth: "100%" }} />
           </a>
@@ -63,7 +63,7 @@ class ProductDetails extends React.Component {
             </div>
 
             <Row>
-              {displayImageList}
+              {this.state.images.length > 1 ? displayImageList :null}
             </Row>
           </Col>
 
