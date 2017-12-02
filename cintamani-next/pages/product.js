@@ -28,6 +28,7 @@ class Product extends React.Component {
                 return item;
         }));
 
+        /// TODO: UseImageHelper -> DataHelper Class for getting main, side category.
         const mainCategory = _.trim(chosenProduct[cellNames.Category].split("-")[0]);
         const sideCategory = _.trim(chosenProduct[cellNames.Category].split("-")[1]);
 
