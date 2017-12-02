@@ -11,6 +11,7 @@ import ProductDetails from '../components/ProductDetails';
 import ExcelImporter from "../api/ExcelImporter";
 import cellNames from "../data/productsCellNames";
 
+import productStyles from "../styles/category.css"
 
 
 class Product extends React.Component {
@@ -26,14 +27,15 @@ class Product extends React.Component {
             if (item[cellNames.ID] == id.toString())
                 return item;
         }));
-        
+
         const mainCategory = _.trim(chosenProduct[cellNames.Category].split("-")[0]);
         const sideCategory = _.trim(chosenProduct[cellNames.Category].split("-")[1]);
 
         return (
             <Layout categories={this.props.categories}>
+                <style> {productStyles} </style>
                 <div>
-                    <span> {mainCategory} > {sideCategory} </span>
+                    <span> {mainCategory} > {sideCategory} > {chosenProduct[cellNames.Name]} </span>
                 </div>
                 <ProductDetails product={chosenProduct} />
             </Layout>

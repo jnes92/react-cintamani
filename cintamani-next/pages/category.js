@@ -38,6 +38,9 @@ class Category extends React.Component {
                 <div>
                     <span> {main} > {side} </span>
                 </div>
+
+                <p className="lead">
+                    Kategoriebeschreibung für {main}, {side} </p>
                 <Grid fluid>
                     <Row xs md lg>
                         {filteredProducts ?
