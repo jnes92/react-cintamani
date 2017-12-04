@@ -11,12 +11,11 @@ describe('FileManager', () => {
         let testPath = "./test/data/FileLoader-write.txt";
 
         it("Should be able to write a file", () => {
-            FileManager.WriteFile(testFile, testPath, "utf8", TestSuccessCallback, TestErrorCallback);
+            FileManager.WriteFile(testFile, testPath, "utf8", () => {
+                // it("Should be able to read a file")
+                FileManager.ReadFile(testPath, "utf8", TestSuccessCallback, TestErrorCallback);
+            }, TestErrorCallback);
         })
-
-        it("Should be able to read a file", () => {
-            FileManager.ReadFile(testPath, "utf8", TestSuccessCallback, TestErrorCallback);
-        });
     });
     describe('Online Services', () => {
         let dbPath = '/Develop/cintamani/products.xlsx';

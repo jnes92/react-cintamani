@@ -7,23 +7,19 @@ import ImageHelper from "../api/ImageHelper";
 
 const ProductItem = ({ article }) => {
 
-  const mainCategory = _.trim(article[cellNames.Category].split("-")[0]);
-  const sideCategory = _.trim(article[cellNames.Category].split("-")[1]);
-
-  const firstImage = article[cellNames.Images];
-
-  const imagePath = ImageHelper.getImagePath(mainCategory, sideCategory, firstImage);
+  const previewImage = ImageHelper.getAllImages(article)[0];
+  const categories = ImageHelper.getCategories(article);
 
   return (
     <Link
-      key={"categoriesList_" + mainCategory + "_" + sideCategory + "_" + article[cellNames.ID]}
-      as={`/${mainCategory}/${sideCategory}/${article[cellNames.ID]}`}
+      key={"categoriesList_" + categories.mainCategory + "_" + categories.sideCategory + "_" + article[cellNames.ID]}
+      as={`/${categories.mainCategory}/${categories.sideCategory}/${article[cellNames.ID]}`}
       href={`/product?id=${article[cellNames.ID]}`}>
 
 
       <div className="product">
         <div className="image" >
-          <img className="img img-responsive" src={imagePath} width="100%" />
+          <img className="img img-responsive" src={previewImage} width="100%" />
         </div>
         <div className="text">
           <h3>           <a>
