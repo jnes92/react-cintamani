@@ -7,9 +7,12 @@ class FileManager {
         let fs = require('fs')
         try {
             let fileData = fs.readFileSync(path, format);
-            if (callback) callback(fileData);
+            if (callback) callback(fileData); 
             if (testFlag) return;
-            else console.warn("FileManager:ReadFile:NoCallbackReceived");
+            else {
+                console.warn("FileManager:ReadFile:NoCallbackReceived");
+                return fileData;
+            }
         } catch (e) {
              errorHandler(e);
              if (testFlag) return;             
@@ -43,6 +46,21 @@ class FileManager {
                 this.WriteFile(data.fileBinary, localPath, 'binary', callback, errorHandler)
             });
         }else console.error("No Dropbox enabled.")
+    }
+
+    static ImportStaticTextFiles(){
+        let defaultPath = "./static/pages/";
+        let defaultExt = ".md";
+
+        const pageNames = ["about", "agb", "imprint"];
+        let pages = [];
+
+        pageNames.forEach((page) => {
+            let url = defaultPath + page + defaultExt;
+            pages.push({ title: page, content: this.ReadFile(url,'utf8')});
+        }); 
+
+        return pages;
     }
 }
 
