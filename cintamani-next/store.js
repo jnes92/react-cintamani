@@ -5,6 +5,7 @@ import thunkMiddleware from 'redux-thunk'
 import ExcelImporter from "./api/ExcelImporter";
 import cellNames from "./data/productsCellNames";
 import RoutesHelper from "./data/routesHelper";
+import FileManager from './api/FileManager';
 
 const initialState = {
     products: [],
@@ -27,12 +28,14 @@ export const reducer = (state = initialState, action) => {
 }
 
 // ACTIONS
+// TODO: rename to getData.
 export const getProducts = (isServer) => dispatch => {
     if (isServer) {
         let products = ExcelImporter.LoadData();
         if (products){
             const categories = ExcelImporter.getCategories(products);
-            let payload = { products, categories }
+            let staticTexts = FileManager.ImportStaticTextFiles();
+            let payload = { products, categories, staticTexts }
             RoutesHelper.SaveRoutes("./data/routes.json");
             return dispatch({ type: actionTypes.GetAllData, payload })
         }
