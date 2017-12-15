@@ -62,22 +62,43 @@ class CategoriesList extends React.Component {
                         })}
                     </ul>
                 </div>
-                <div style={{ textAlign: "center", marginTop: "auto" }}>
-                    Static Pages:
-                    <ul>
-                        {staticTexts ?
-                            staticTexts.map((staticTextElement) => (
-                                <Link
-                                    key={"categoriesList_static" + staticTextElement.title}
-                                    as={`/static/${staticTextElement.title}`}
-                                    href={`/static?title=${staticTextElement.title}`}>
-                                    <a style={{textDecoration: "none", color: "black"}}>
-                                        <li> {staticTextElement.title}</li>
-                                    </a>
-                                </Link>
-                            )) : console.log(this.props)
-                        }
-                    </ul>
+                <div style={{ textAlign: "center", marginTop: "auto", marginBottom: "15px", fontSize: "12px" }}>
+                    <div style={{ flex: "auto", flexDirection: "column", justifyContent: 'space-between' }}>
+                        <div>
+                            <div style={{ flex: 'auto', flexDirection: 'row', justifyContent: 'flex-start' }} >
+                                <i style={{ color: '#777' }} class="fa fa-home" aria-hidden="true"></i>
+                                <span style={{ color: "#777" }}>  Bornstraße 37 <br /> 56379 Singhofen</span>
+                            </div>
+                            <div style={{ flex: 'auto', flexDirection: 'row', justifyContent: 'flex-start' }} >
+                                <i style={{ color: '#777' }} class="fa fa-phone" aria-hidden="true"></i>
+                                <span style={{ color: "#777" }}> (+49) 2604 8443</span>
+                            </div>
+                            <div style={{ flex: 'auto', flexDirection: 'row', justifyContent: 'flex-start' }} >
+                                <i style={{ color: '#777' }} class="fa fa-envelope" aria-hidden="true"></i>
+                                <a style={{textDecoration:'none'}} href="mailto:christianoesterle@gmx.de"> <span style={{ color: "#777" }}> christianoesterle@gmx.de</span> </a>
+                            </div>
+                        </div>
+
+                        <ul style={{ padding: "0", listStyle: "none" }}>
+                            {staticTexts ?
+                                staticTexts.map((staticTextElement) => (
+                                    <li>
+                                        <Link
+                                            key={"categoriesList_static" + staticTextElement.title}
+                                            as={`/${staticTextElement.path}`}
+                                            href={`/${staticTextElement.path}`}>
+                                            <a style={{ textDecoration: "none", color: "#aeb2b7" }}>
+                                                {staticTextElement.title}
+                                            </a>
+                                        </Link>
+                                    </li>
+                                )) : console.log(this.props)
+                            }
+                        </ul>
+
+
+                        <span style={{ color: "#777" }}> ©Copyright {new Date().getFullYear()} Cintamani. </span>
+                    </div>
                 </div>
             </aside>
         )

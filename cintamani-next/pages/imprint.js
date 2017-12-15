@@ -21,9 +21,9 @@ class Home extends React.Component {
     }
 
     render() {
-        const activeSide = this.props.route.title;
+        const activeSide = 'imprint';
         let md = _.first(this.props.staticTexts.filter((staticText) => {
-            return staticText.title === activeSide;
+            return staticText.path === activeSide;
         }));
 
         return (
