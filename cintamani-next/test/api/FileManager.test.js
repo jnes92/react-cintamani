@@ -18,11 +18,13 @@ describe('FileManager', () => {
         });
 
         it("Should ImportStaticTextFiles", () => {
-            let firstLineTextAgb = "# Über uns";
+            let firstLineTextAbout = "# Über uns";
+            let aboutIndex = 1; // about.md in array["agbs","about"]
             let texts = FileManager.ImportStaticTextFiles();
-            texts.should.have.length(3);
-            let firstLineImported = texts[0].content.split("\n")[0];
-            firstLineImported.should.be.equal(firstLineTextAgb);
+            texts.should.have.length(2);
+            // texts.should.have.length(3); // TODO: ADD IMPRINT!!
+            let firstLineImported = texts[aboutIndex].content.split("\n")[0];
+            firstLineImported.should.be.equal(firstLineTextAbout);
         });
     });
 
