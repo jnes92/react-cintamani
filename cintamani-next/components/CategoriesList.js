@@ -25,6 +25,9 @@ class CategoriesList extends React.Component {
         if (!categories) return (<div> Please import categories </div>);
         return (
             <aside className="sidebar" style={{ width: "100%", display: "flex", flexDirection: "column" }}>
+            <div id="logo">
+            <img style={{width: '75%', padding:'25px'}} src="/static/images/logo.png" />
+            </div>
                 <div id="leftside-navigation" className="nano">
                     <ul className="nano-content">
                         <li>
