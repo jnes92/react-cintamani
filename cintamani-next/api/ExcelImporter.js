@@ -3,26 +3,27 @@ import _ from "lodash";
 
 import cellNames from "../data/productsCellNames";
 import FileManager from "./FileManager"
+import ImageHelper from "./ImageHelper"
 
 class ExcelImporter {
     static locPath = './data/products.xlsx';
     static dbLocalPath = './data/products-db.xlsx';
     static dbPath = '/Develop/cintamani/products.xlsx';
 
-    static LoadData(){
-        let dev = process.env.NODE_ENV !== 'production' 
-        if (FileManager.isDropboxEnabled) 
-        this.importDropbox(() => {
-            return this.import(path);
-        });
-        let path = dev? "data/products.xlsx" :"data/products-db.xlsx";
+    static LoadData() {
+        let dev = process.env.NODE_ENV !== 'production'
+        if (FileManager.isDropboxEnabled)
+            this.importDropbox(() => {
+                return this.import(path);
+            });
+        let path = dev ? "data/products.xlsx" : "data/products-db.xlsx";
 
         return this.import(path);
     }
 
     static import(path = "data/products.xlsx", testFlag = false) {
         let workbook = XLSX.readFile(path);
-        return this.convert(workbook,testFlag);
+        return this.convert(workbook, testFlag);
     }
 
     static convert(workbook, testFlag = false) {
@@ -71,8 +72,32 @@ class ExcelImporter {
             }
         });
 
+        if (!this.verifyLineImage(tableObjectRow)) {
+            debugger;
+            if (!testFlag) console.error("Error, product in line " + (index + 1) + " has invalid Image");
+            errorsInLine++;
+        }
+
         if (errorsInLine == 0) return true;
         else return false;
+    }
+
+    static verifyLineImage(tableObjectRow) {
+        if (tableObjectRow[cellNames.Images]) {
+            let images = ImageHelper.getAllImages(tableObjectRow);
+            let imagesFound = 0;
+            images.forEach((imagePath) => {
+                let fs = require('fs')
+                let fstats = fs.existsSync('.' + imagePath);
+                if( fstats )
+                imagesFound++;
+                else console.error(imagePath);
+            })
+            if (images.length === imagesFound)
+            return true;
+            else return false;
+        }
+        else  return false;
     }
 
     static getFlatCategories(tableObjects) {

@@ -12,7 +12,7 @@ class FileManager {
             else console.warn("FileManager:ReadFile:NoCallbackReceived");
         } catch (e) {
              errorHandler(e);
-             if (testFlag) return;             
+             if (testFlag) return;            
              console.error(e);
         }
     }

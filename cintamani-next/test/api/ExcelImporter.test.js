@@ -70,7 +70,7 @@ describe('ExcelImporter', () => {
         tableObjectTestData =
           {
             __rowNum__: 1, ID: "1", Category: "Buddhas - Aksobhya",
-            Description: "Beschreibung", Images: "asd.jpg", Name: "Test",
+            Description: "Beschreibung", Images: "001.jpg", Name: "Test",
             Price: "10", Quantity: "1"
           }
       })
@@ -97,6 +97,18 @@ describe('ExcelImporter', () => {
       it("Should check for missing Price", () => {
         tableObjectTestData.Price = "";
         ExcelImporter.verifyLine(tableObjectTestData, 0, true).should.be.false;
+      })
+
+      it("Should check for missing Image // incorrect path", () => {
+        tableObjectTestData.Images = "";
+        ExcelImporter.verifyLineImage(tableObjectTestData, 0, true).should.be.false;
+        
+        tableObjectTestData.Images = "001.JPG";
+        ExcelImporter.verifyLineImage(tableObjectTestData, 0, true).should.be.true;
+        debugger;
+        
+        tableObjectTestData.Images = "notexisting.JPG";
+        ExcelImporter.verifyLineImage(tableObjectTestData, 0, true).should.be.false;
       })
 
       it("Should have routes for live system", () => {

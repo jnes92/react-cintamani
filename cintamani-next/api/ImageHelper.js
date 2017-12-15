@@ -5,8 +5,7 @@ import cellNames from "../data/productsCellNames";
 
 class ImageHelper {
 
-    static fakePicturePath = true;
-
+    static fakePicturePath = false;
 
     static getImagePath(main, side, image) {
         const imagePath = "/static/images/products/" + main + "/" + side + "/" + image;
@@ -31,18 +30,19 @@ class ImageHelper {
         return images;
     }
 
-    static getAllImages(productDataItem){
+    static getAllImages(productDataItem, includeCategorySortString = false){
         let categories = this.getCategories(productDataItem);
         let imagesShort = this.getAllImagesAsShortString(productDataItem[cellNames.Images]);
 
         let imagesLong = [];
         imagesShort.forEach((shortString) => {
-            imagesLong.push(this.getImagePath(categories.mainCategory,categories.sideCategory, shortString));
-        });
+            if (includeCategorySortString)
+                imagesLong.push(this.getImagePath(categories.mainCategory,categories.sideCategory, shortString));
+            else imagesLong.push('/static/images/products/' + shortString);
+            });
 
         
         if(this.fakePicturePath){
-
             let fakeImages = [];
             let testMain = "Buddhas";
             let testSide ="Manjusri";

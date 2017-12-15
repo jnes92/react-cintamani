@@ -41,7 +41,7 @@ describe('ImageHelper', () => {
 
             // TODO: Remove FakePicturePath after inserting all imgs.
             ImageHelper.fakePicturePath = false;
-            let images = ImageHelper.getAllImages(testProduct);
+            let images = ImageHelper.getAllImages(testProduct, true);
             images.should.be.a("array");
             images.should.have.length(3);
 
