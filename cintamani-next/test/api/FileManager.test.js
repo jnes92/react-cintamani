@@ -24,7 +24,7 @@ describe('FileManager', () => {
             texts.should.have.length(2);
             // texts.should.have.length(3); // TODO: ADD IMPRINT!!
             let firstLineImported = texts[aboutIndex].content.split("\n")[0];
-            firstLineImported.should.be.equal(firstLineTextAbout);
+            expect(firstLineImported).to.include(firstLineTextAbout);
         });
     });
 
