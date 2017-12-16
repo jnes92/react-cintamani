@@ -15,8 +15,19 @@ describe('FileManager', () => {
                 // it("Should be able to read a file")
                 FileManager.ReadFile(testPath, "utf8", TestSuccessCallback, TestErrorCallback);
             }, TestErrorCallback);
-        })
+        });
+
+        it("Should ImportStaticTextFiles", () => {
+            let firstLineTextAbout = "# Über uns";
+            let aboutIndex = 1; // about.md in array["agbs","about"]
+            let texts = FileManager.ImportStaticTextFiles();
+            texts.should.have.length(2);
+            // texts.should.have.length(3); // TODO: ADD IMPRINT!!
+            let firstLineImported = texts[aboutIndex].content.split("\n")[0];
+            expect(firstLineImported).to.include(firstLineTextAbout);
+        });
     });
+
     describe('Online Services', () => {
         let dbPath = '/Develop/cintamani/products.xlsx';
         let locPath = "./test/data/FileLoader-donwload.xlsx";

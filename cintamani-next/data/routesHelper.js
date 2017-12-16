@@ -15,6 +15,9 @@ class RoutesHelper {
     // Get Home, Static Routes: index.js
     let routes = {
       '/': { page: '/' },
+      '/agb': { page: '/agb' },
+      // '/imprint': { page: '/imprint' },
+      '/about': { page: '/about' },
       /// TODO: Add Static Routes like impressum, etc.
     }
 

@@ -18,7 +18,10 @@ class Home extends React.Component {
 
     render() {
         return (
-            <Layout categories={this.props.categories} >
+            <Layout
+                categories={this.props.categories}
+                staticTexts={this.props.staticTexts}
+            >
                 <style>
                     {styles}
                 </style>
@@ -35,10 +38,11 @@ class Home extends React.Component {
         )
     }
 }
-const mapStateToProps = ({ products, categories }) => {
+const mapStateToProps = ({ products, categories, staticTexts }) => {
     return {
         products,
-        categories
+        categories,
+        staticTexts
     }
 }
 
