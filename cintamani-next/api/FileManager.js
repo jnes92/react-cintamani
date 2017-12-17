@@ -1,6 +1,6 @@
-
+﻿
 class FileManager {
-    static isDropboxEnabled = true;
+    static isDropboxEnabled = false;
 
     /// Reads a file from Folder path and returns data inside callback.
     static ReadFile(path, format, callback, errorHandler, testFlag = false) {
