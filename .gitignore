@@ -1,6 +1,8 @@
+.next/
+node_modules/
+dist/
+out/
+test-output/
 
-import/
-
-cintamani-next/test/data/FileLoader-donwload\.xlsx
-
-cintamani-next/test/data/FileLoader-write\.txt
+routes.json
+data/products_db.xlsx
