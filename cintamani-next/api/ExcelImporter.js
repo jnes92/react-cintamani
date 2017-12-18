@@ -10,14 +10,14 @@ class ExcelImporter {
     static dbLocalPath = './data/products-db.xlsx';
     static dbPath = '/Develop/cintamani/products.xlsx';
 
-    static LoadData() {
-        let dev = process.env.NODE_ENV !== 'production'
-        if (FileManager.isDropboxEnabled)
-            this.importDropbox(() => {
-                return this.import(path);
-            });
-        let path = dev ? "data/products.xlsx" : "data/products-db.xlsx";
-
+    static LoadData(){
+        let dev = process.env.NODE_ENV !== 'production' 
+        if (FileManager.isDropboxEnabled) 
+        this.importDropbox(() => {
+            return this.import(path);
+        });
+        let path = (dev || !FileManager.isDropboxEnabled)? "data/products.xlsx" :"data/products-db.xlsx";
+        console.log("Loading data from " + path);
         return this.import(path);
     }
 
