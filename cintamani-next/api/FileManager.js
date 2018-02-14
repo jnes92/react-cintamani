@@ -1,19 +1,22 @@
-
+﻿
 class FileManager {
     static isDropboxEnabled = false;
 
     /// Reads a file from Folder path and returns data inside callback.
-    static ReadFile(path, format, callback, errorHandler, testFlag=false) {
+    static ReadFile(path, format, callback, errorHandler, testFlag = false) {
         let fs = require('fs')
         try {
             let fileData = fs.readFileSync(path, format);
             if (callback) callback(fileData);
             if (testFlag) return;
-            else console.warn("FileManager:ReadFile:NoCallbackReceived");
+            else {
+                console.warn("FileManager:ReadFile:NoCallbackReceived");
+                return fileData;
+            }
         } catch (e) {
-             errorHandler(e);
-             if (testFlag) return;            
-             console.error(e);
+            errorHandler(e);
+            if (testFlag) return;
+            console.error(e);
         }
     }
 
@@ -35,14 +38,33 @@ class FileManager {
     }
 
     static DownloadFile(dbPath, localPath, callback, errorHandler) {
-        if(this.isDropboxEnabled){
+        if (this.isDropboxEnabled) {
             let Dropbox = require('dropbox');
             let dbx = new Dropbox({ accessToken: 'MYYp9clMLBIAAAAAAAALSk6hF4_cib45bGn3Tr5j84BzAms8t9Srkycin7V5pLDh' });
             let file = dbx.filesDownload({ path: dbPath })
             file.then((data) => {
                 this.WriteFile(data.fileBinary, localPath, 'binary', callback, errorHandler)
             });
-        }else console.error("No Dropbox enabled.")
+        } else console.error("No Dropbox enabled.")
+    }
+
+    static ImportStaticTextFiles() {
+        let defaultPath = "./static/pages/";
+        let defaultExt = ".md";
+
+        const pageNames = [
+            { data: "agb", name: "AGB´s" }, 
+            // { data: "imprint", name: "Impressum" }, //TODO: ADD IMPRINT            
+            { data: "about", name: "Über cintamani" },             
+        ];
+
+        let pages =[];
+        pageNames.forEach((page) => {
+            let url = defaultPath + page.data + defaultExt;
+            pages.push({ title: page.name, content: this.ReadFile(url, 'utf8'), path: page.data });
+        });
+
+        return pages;
     }
 }
 
