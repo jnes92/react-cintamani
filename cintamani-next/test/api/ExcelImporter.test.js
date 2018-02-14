@@ -50,7 +50,7 @@ describe('ExcelImporter', () => {
       const expectedOutput = [
         { name: "Buddhas", subCategories: ["Aksobhya", "Shakyamuni"] },
         { name: "Malas", subCategories: ["Arm Mala"] },
-        { name: "Thangkas", subCategories: ["Big Tsagil"] }
+        { name: "Thangkas", subCategories: ["big Tsagil"] }
       ];
 
       foundCategories.should.be.deep.equal(expectedOutput);
@@ -58,11 +58,11 @@ describe('ExcelImporter', () => {
 
   })
 
-  // describe('Verify Live Data()', () => {
-  //   it("Live data should have no duplicates", () => {
-  //     let importedData = ExcelImporter.LoadData();
-  //     importedData.should.have.length.greaterThan(0);
-  //   });
+  describe('Verify Live Data()', () => {
+    it("Live data should have no duplicates", () => {
+      let importedData = ExcelImporter.LoadData();
+      importedData.should.have.length.greaterThan(0);
+    });
 
   //   describe("Live data should have filled required fields", () => {
   //     let tableObjectTestData;
@@ -133,5 +133,5 @@ describe('ExcelImporter', () => {
   //     });
 
   //   });
-  // })
+  })
 });

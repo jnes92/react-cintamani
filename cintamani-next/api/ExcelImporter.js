@@ -74,7 +74,7 @@ class ExcelImporter {
         });
 
         if (!this.verifyLineImage(tableObjectRow, testFlag)) {
-            if (!testFlag) console.error("Error, product in line " + (index + 1) + " has invalid Image");
+            if (testFlag) console.error("Error, product in line " + (index + 1) + " has invalid Image");
             errorsInLine++;
         }
 
@@ -91,7 +91,7 @@ class ExcelImporter {
                 let fstats = fs.existsSync('.' + imagePath);
                 if (fstats)
                     imagesFound++;
-                else if (testFlag) console.error(imagePath);
+                else console.error(imagePath);
             })
             if (images.length === imagesFound)
                 return true;
