@@ -10,13 +10,13 @@ class ExcelImporter {
     static dbLocalPath = './data/products-db.xlsx';
     static dbPath = '/Develop/cintamani/products.xlsx';
 
-    static LoadData(){
-        let dev = process.env.NODE_ENV !== 'production' 
-        if (FileManager.isDropboxEnabled) 
-        this.importDropbox(() => {
-            return this.import(path);
-        });
-        let path = (dev || !FileManager.isDropboxEnabled)? "data/products.xlsx" :"data/products-db.xlsx";
+    static LoadData() {
+        let dev = process.env.NODE_ENV !== 'production'
+        if (FileManager.isDropboxEnabled)
+            this.importDropbox(() => {
+                return this.import(path);
+            });
+        let path = (dev || !FileManager.isDropboxEnabled) ? "data/products.xlsx" : "data/products-db.xlsx";
         console.log("Loading data from " + path);
         return this.import(path);
     }
@@ -53,7 +53,7 @@ class ExcelImporter {
         let noMissingFields = true;
         // check single lines
         tableObjects.forEach((product, index) => {
-            noMissingFields &= this.verifyLine(product, index);
+            noMissingFields &= this.verifyLine(product, index, testFlag);
         })
 
         return noDuplicateData && noMissingFields;
@@ -65,6 +65,7 @@ class ExcelImporter {
         // Dont verify Image, Description, Quantity
         let verifyCells = _.without(keyCells, cellNames.Images, cellNames.Description, cellNames.Quantity);
 
+
         verifyCells.forEach(cellToVerify => {
             if (!tableObjectRow[cellToVerify]) {
                 if (!testFlag) console.error("Error, product in line " + (index + 1) + " has invalid " + cellToVerify);
@@ -72,8 +73,7 @@ class ExcelImporter {
             }
         });
 
-        if (!this.verifyLineImage(tableObjectRow)) {
-            debugger;
+        if (!this.verifyLineImage(tableObjectRow, testFlag)) {
             if (!testFlag) console.error("Error, product in line " + (index + 1) + " has invalid Image");
             errorsInLine++;
         }
@@ -82,22 +82,22 @@ class ExcelImporter {
         else return false;
     }
 
-    static verifyLineImage(tableObjectRow) {
+    static verifyLineImage(tableObjectRow, testFlag) {
         if (tableObjectRow[cellNames.Images]) {
             let images = ImageHelper.getAllImages(tableObjectRow, true);
             let imagesFound = 0;
             images.forEach((imagePath) => {
                 let fs = require('fs')
                 let fstats = fs.existsSync('.' + imagePath);
-                if( fstats )
-                imagesFound++;
-                else console.error(imagePath);
+                if (fstats)
+                    imagesFound++;
+                else if (testFlag) console.error(imagePath);
             })
             if (images.length === imagesFound)
-            return true;
+                return true;
             else return false;
         }
-        else  return false;
+        else return false;
     }
 
     static getFlatCategories(tableObjects) {
