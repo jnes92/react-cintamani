@@ -84,7 +84,7 @@ class ExcelImporter {
 
     static verifyLineImage(tableObjectRow) {
         if (tableObjectRow[cellNames.Images]) {
-            let images = ImageHelper.getAllImages(tableObjectRow);
+            let images = ImageHelper.getAllImages(tableObjectRow, true);
             let imagesFound = 0;
             images.forEach((imagePath) => {
                 let fs = require('fs')
