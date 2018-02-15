@@ -59,10 +59,10 @@ describe('ExcelImporter', () => {
   })
 
   describe('Verify Live Data()', () => {
-    it("Live data should have no duplicates / get data", () => {
-      let importedData = ExcelImporter.LoadData();
-      importedData.should.have.length.greaterThan(0);
-    });
+    // it("Live data should have no duplicates / get data", () => {
+    //   let importedData = ExcelImporter.LoadData();
+    //   importedData.should.have.length.greaterThan(0);
+    // });
 
     describe("Live data should have filled required fields", () => {
       let tableObjectTestData;
@@ -86,7 +86,10 @@ describe('ExcelImporter', () => {
 
       it("Should check for missing Category", () => {
         tableObjectTestData.Category = "";
+        debugger;
+
         ExcelImporter.verifyLine(tableObjectTestData, 0, true).should.be.false;
+        debugger;
       })
 
       it("Should check for missing Name", () => {
@@ -96,6 +99,7 @@ describe('ExcelImporter', () => {
 
       it("Should check for missing Price", () => {
         tableObjectTestData.Price = "";
+
         ExcelImporter.verifyLine(tableObjectTestData, 0, true).should.be.false;
       })
 
@@ -105,7 +109,6 @@ describe('ExcelImporter', () => {
         
         tableObjectTestData.Images = "BAkso001.JPG";
         ExcelImporter.verifyLineImage(tableObjectTestData, true).should.be.true;
-        debugger;
         
         tableObjectTestData.Images = "notexisting.JPG";
         ExcelImporter.verifyLineImage(tableObjectTestData,  true).should.be.false;
