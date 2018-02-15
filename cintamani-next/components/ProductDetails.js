@@ -12,8 +12,8 @@ class ProductDetails extends React.Component {
     super(props);
 
     this.state = {
-      images: ImageHelper.getAllImages(props.product),
-      activeImage: ImageHelper.getAllImages(props.product)[0]
+      images: ImageHelper.getAllImages(props.product,true),
+      activeImage: ImageHelper.getAllImages(props.product,true)[0]
     }
   }
 

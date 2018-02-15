@@ -59,79 +59,79 @@ describe('ExcelImporter', () => {
   })
 
   describe('Verify Live Data()', () => {
-    it("Live data should have no duplicates", () => {
+    it("Live data should have no duplicates / get data", () => {
       let importedData = ExcelImporter.LoadData();
       importedData.should.have.length.greaterThan(0);
     });
 
-  //   describe("Live data should have filled required fields", () => {
-  //     let tableObjectTestData;
-  //     beforeEach(() => {
-  //       tableObjectTestData =
-  //         {
-  //           __rowNum__: 1, ID: "1", Category: "Buddhas - Aksobhya",
-  //           Description: "Beschreibung", Images: "001.jpg", Name: "Test",
-  //           Price: "10", Quantity: "1"
-  //         }
-  //     })
+    describe("Live data should have filled required fields", () => {
+      let tableObjectTestData;
+      beforeEach(() => {
+        tableObjectTestData =
+          {
+            __rowNum__: 1, ID: "1", Category: "Buddhas - Aksobhya",
+            Description: "Beschreibung", Images: "BAkso001.JPG", Name: "Test",
+            Price: "10", Quantity: "1"
+          }
+      })
 
-  //     it("Should be true if row is fine", () => {
-  //       ExcelImporter.verifyLine(tableObjectTestData, 0, true).should.be.true;
-  //     })
+      it("Should be true if row is fine", () => {
+        ExcelImporter.verifyLine(tableObjectTestData, 0, false).should.be.true;
+      })
 
-  //     it("Should check for missing ID", () => {
-  //       tableObjectTestData.ID = "";
-  //       ExcelImporter.verifyLine(tableObjectTestData, 0, true).should.be.false;
-  //     })
+      it("Should check for missing ID", () => {
+        tableObjectTestData.ID = "";
+        ExcelImporter.verifyLine(tableObjectTestData, 0, true).should.be.false;
+      })
 
-  //     it("Should check for missing Category", () => {
-  //       tableObjectTestData.Category = "";
-  //       ExcelImporter.verifyLine(tableObjectTestData, 0, true).should.be.false;
-  //     })
+      it("Should check for missing Category", () => {
+        tableObjectTestData.Category = "";
+        ExcelImporter.verifyLine(tableObjectTestData, 0, true).should.be.false;
+      })
 
-  //     it("Should check for missing Name", () => {
-  //       tableObjectTestData.Name = "";
-  //       ExcelImporter.verifyLine(tableObjectTestData, 0, true).should.be.false;
-  //     })
+      it("Should check for missing Name", () => {
+        tableObjectTestData.Name = "";
+        ExcelImporter.verifyLine(tableObjectTestData, 0, true).should.be.false;
+      })
 
-  //     it("Should check for missing Price", () => {
-  //       tableObjectTestData.Price = "";
-  //       ExcelImporter.verifyLine(tableObjectTestData, 0, true).should.be.false;
-  //     })
+      it("Should check for missing Price", () => {
+        tableObjectTestData.Price = "";
+        ExcelImporter.verifyLine(tableObjectTestData, 0, true).should.be.false;
+      })
 
-  //     it("Should check for missing Image // incorrect path", () => {
-  //       tableObjectTestData.Images = "";
-  //       ExcelImporter.verifyLineImage(tableObjectTestData, true).should.be.false;
+      it("Should check for missing Image // incorrect path", () => {
+        tableObjectTestData.Images = "";
+        ExcelImporter.verifyLineImage(tableObjectTestData, true).should.be.false;
         
-  //       tableObjectTestData.Images = "001.JPG";
-  //       ExcelImporter.verifyLineImage(tableObjectTestData, true).should.be.true;
-  //       debugger;
+        tableObjectTestData.Images = "BAkso001.JPG";
+        ExcelImporter.verifyLineImage(tableObjectTestData, true).should.be.true;
+        debugger;
         
-  //       tableObjectTestData.Images = "notexisting.JPG";
-  //       ExcelImporter.verifyLineImage(tableObjectTestData,  true).should.be.false;
-  //     })
+        tableObjectTestData.Images = "notexisting.JPG";
+        ExcelImporter.verifyLineImage(tableObjectTestData,  true).should.be.false;
+      })
 
-  //     it("Should have routes for live system", () => {
-  //       let pathToRoutes = "./data/routes.json";
-  //       FileManager.ReadFile(pathToRoutes, 'utf8',
-  //         (success) => {
-  //           expect(success).to.exist;
-  //         }, (error) => {
-  //           RoutesHelper.SaveRoutes(pathToRoutes, () => {
-  //             FileManager.ReadFile(pathToRoutes, 'utf8',
-  //               (success) => {
-  //                 expect(success).to.exist;
-  //               }, (error) => {
-  //                 true.should.be.false;
-  //               }, true);
-  //           });
-  //         }, true);
-  //     });
+      it("Should have routes for live system", () => {
+        let pathToRoutes = "./data/routes.json";
+        FileManager.ReadFile(pathToRoutes, 'utf8',
+          (success) => {
+            expect(success).to.exist;
+          }, (error) => {
+            RoutesHelper.SaveRoutes(pathToRoutes, () => {
+              FileManager.ReadFile(pathToRoutes, 'utf8',
+                (success) => {
+                  expect(success).to.exist;
+                }, (error) => {
+                  true.should.be.false;
+                }, true);
+            });
+          }, true);
+      });
 
-  //     it("Should get data from dropbox folder", () => {
-  //       ExcelImporter.importDropbox(() => console.log("Dropbox imported"));
-  //     });
+      it("Should get data from dropbox folder", () => {
+        ExcelImporter.importDropbox(() => console.log("Dropbox imported"));
+      });
 
-  //   });
+    });
   })
 });
