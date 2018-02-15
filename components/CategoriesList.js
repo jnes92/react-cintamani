@@ -95,7 +95,7 @@ class CategoriesList extends React.Component {
                                             </a>
                                         </Link>
                                     </li>
-                                )) : console.log(this.props)
+                                )) : null
                             }
                         </ul>
 

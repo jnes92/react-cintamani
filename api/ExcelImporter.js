@@ -17,7 +17,6 @@ class ExcelImporter {
                 return this.import(path);
             });
         let path = (dev || !FileManager.isDropboxEnabled) ? "data/products.xlsx" : "data/products-db.xlsx";
-        console.log("Loading data from " + path);
         return this.import(path, testFlag);
     }
 
