@@ -1,0 +1,23 @@
+.hero {
+    height: 100vh; 
+    width: 100vw;
+}
+.text-box {
+    width: 100%;
+    position: absolute;
+    left: 10%;
+    top: 33%;
+    text-align: left
+}
+.text-headline {
+    font-style: normal;
+    display: block;
+    color: #fff;
+    font-weight: 600
+}
+.text-subtitle {
+    color: #fff; 
+    line-height: 1; 
+    font-weight: 800; 
+    margin: 0
+}
