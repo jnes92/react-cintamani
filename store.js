@@ -31,7 +31,8 @@ export const reducer = (state = initialState, action) => {
 // TODO: rename to getData.
 export const getProducts = (isServer) => dispatch => {
     if (isServer) {
-        let products = ExcelImporter.LoadData();
+        let products = ExcelImporter.LoadData(true);
+        console.log(products.length);
         if (products){
             const categories = ExcelImporter.getCategories(products);
             let staticTexts = FileManager.ImportStaticTextFiles();

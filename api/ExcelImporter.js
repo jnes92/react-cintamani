@@ -10,7 +10,7 @@ class ExcelImporter {
     static dbLocalPath = './data/products-db.xlsx';
     static dbPath = '/Develop/cintamani/products.xlsx';
 
-    static LoadData() {
+    static LoadData(testFlag = false) {
         let dev = process.env.NODE_ENV !== 'production'
         if (FileManager.isDropboxEnabled)
             this.importDropbox(() => {
@@ -18,7 +18,7 @@ class ExcelImporter {
             });
         let path = (dev || !FileManager.isDropboxEnabled) ? "data/products.xlsx" : "data/products-db.xlsx";
         console.log("Loading data from " + path);
-        return this.import(path);
+        return this.import(path, testFlag);
     }
 
     static import(path = "data/products.xlsx", testFlag = false) {
@@ -31,32 +31,40 @@ class ExcelImporter {
         let worksheet = workbook.Sheets[first_sheet_name];
         let tableObjects = XLSX.utils.sheet_to_json(worksheet);
 
-        if (this.verifyCompleteData(tableObjects, testFlag))
-            return tableObjects;
-        else return [];
+        return this.verifyCompleteData(tableObjects,testFlag);
     }
 
     static importDropbox(callback) {
         FileManager.DownloadFile(this.dbPath, this.dbLocalPath, callback);
     }
 
+    static checkForDuplicates(tableObjects, testFlag){
+         // check for duplicates.
+         let importedRows = tableObjects.length;
+         let uniqRows = _.uniqBy(tableObjects, cellNames.ID).length;
+         let noDuplicateData = importedRows == uniqRows;
+ 
+         let diff = _.difference(tableObjects, _.uniqBy(tableObjects, cellNames.ID));
+         if (diff.length > 0 && !testFlag)
+             console.error("Error, found duplicate ID: " + _.first(diff)[cellNames.ID]);
+
+        return noDuplicateData;
+    }
+
     static verifyCompleteData(tableObjects, testFlag = false) {
-        // check for duplicates.
-        let importedRows = tableObjects.length;
-        let uniqRows = _.uniqBy(tableObjects, cellNames.ID).length;
-        let noDuplicateData = importedRows == uniqRows;
-
-        let diff = _.difference(tableObjects, _.uniqBy(tableObjects, cellNames.ID));
-        if (diff.length > 0 && !testFlag)
-            console.error("Error, found duplicate ID: " + _.first(diff)[cellNames.ID]);
-
-        let noMissingFields = true;
-        // check single lines
-        tableObjects.forEach((product, index) => {
-            noMissingFields &= this.verifyLine(product, index, testFlag);
+       
+        let noDuplicateData = this.checkForDuplicates(tableObjects, testFlag);
+        let workingProducts =[];
+        
+        tableObjects.forEach((to,index) => {
+            if (this.verifyLine(to, index, testFlag)) 
+            workingProducts.push(to);
+            else {
+                console.log("error",index);
+            }
         })
 
-        return noDuplicateData && noMissingFields;
+        return noDuplicateData? workingProducts : [];
     }
 
     static verifyLine(tableObjectRow, index, testFlag = false) {
@@ -79,7 +87,9 @@ class ExcelImporter {
         }
 
         if (errorsInLine == 0) return true;
-        else return false;
+        else {
+            return false;
+        }
     }
 
     static verifyLineImage(tableObjectRow, testFlag) {
