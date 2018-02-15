@@ -6,24 +6,24 @@ import RoutesHelper from "../../data/routesHelper";
 
 var assert = chai.assert, expect = chai.expect, should = chai.should();
 
-const actualDataSize = 6;
-const actualUniqueGroups = 5;
+const actualDataSize = 4;
+const actualUniqueGroups = 4;
 const testDataPath = "./test/data/products_test.xlsx";
 
 
 describe('ExcelImporter', () => {
   describe('import products.xlsx', () => {
     it("import(path) " + actualDataSize + " products", () => {
-      let importedData = ExcelImporter.import(testDataPath);
+      let importedData = ExcelImporter.import(testDataPath,true);
       importedData.should.be.a("array");
 
       assert.equal(importedData.length, actualDataSize, "Imported all rows of data");
     });
 
-    it("import defaultData if no args", () => {
-      let importedData = ExcelImporter.LoadData();
-      importedData.should.be.a("array");
-    });
+    // it("import defaultData if no args", () => {
+    //   let importedData = ExcelImporter.LoadData();
+    //   importedData.should.be.a("array");
+    // });
 
     it("should not import, if duplicates", () => {
       const testDataDuplicates = "./test/data/products_test_duplicates.xlsx";
@@ -36,7 +36,7 @@ describe('ExcelImporter', () => {
   describe('getCategories()', () => {
     it("getFlatCategories() : should get all categories as string[]", () => {
 
-      let importedData = ExcelImporter.import(testDataPath);
+      let importedData = ExcelImporter.import(testDataPath,true);
       let foundCategories = ExcelImporter.getFlatCategories(importedData);
 
       foundCategories.should.have.length(actualUniqueGroups);
@@ -48,9 +48,9 @@ describe('ExcelImporter', () => {
       let foundCategories = ExcelImporter.getCategories(importedData);
 
       const expectedOutput = [
-        { name: "Buddhas", subCategories: ["Aksobhya", "Manjusri"] },
-        { name: "Malas", subCategories: ["klein"] },
-        { name: "Thangkas", subCategories: ["groß", "klein"] }
+        { name: "Buddhas", subCategories: ["Aksobhya", "Shakyamuni"] },
+        { name: "Malas", subCategories: ["Arm Mala"] },
+        { name: "Thangkas", subCategories: ["big Tsagil"] }
       ];
 
       foundCategories.should.be.deep.equal(expectedOutput);
@@ -59,10 +59,10 @@ describe('ExcelImporter', () => {
   })
 
   describe('Verify Live Data()', () => {
-    it("Live data should have no duplicates", () => {
-      let importedData = ExcelImporter.LoadData();
-      importedData.should.have.length.greaterThan(0);
-    });
+    // it("Live data should have no duplicates / get data", () => {
+    //   let importedData = ExcelImporter.LoadData();
+    //   importedData.should.have.length.greaterThan(0);
+    // });
 
     describe("Live data should have filled required fields", () => {
       let tableObjectTestData;
@@ -70,13 +70,13 @@ describe('ExcelImporter', () => {
         tableObjectTestData =
           {
             __rowNum__: 1, ID: "1", Category: "Buddhas - Aksobhya",
-            Description: "Beschreibung", Images: "001.jpg", Name: "Test",
+            Description: "Beschreibung", Images: "BAkso001.JPG", Name: "Test",
             Price: "10", Quantity: "1"
           }
       })
 
       it("Should be true if row is fine", () => {
-        ExcelImporter.verifyLine(tableObjectTestData, 0, true).should.be.true;
+        ExcelImporter.verifyLine(tableObjectTestData, 0, false).should.be.true;
       })
 
       it("Should check for missing ID", () => {
@@ -86,7 +86,10 @@ describe('ExcelImporter', () => {
 
       it("Should check for missing Category", () => {
         tableObjectTestData.Category = "";
+        debugger;
+
         ExcelImporter.verifyLine(tableObjectTestData, 0, true).should.be.false;
+        debugger;
       })
 
       it("Should check for missing Name", () => {
@@ -96,19 +99,19 @@ describe('ExcelImporter', () => {
 
       it("Should check for missing Price", () => {
         tableObjectTestData.Price = "";
+
         ExcelImporter.verifyLine(tableObjectTestData, 0, true).should.be.false;
       })
 
       it("Should check for missing Image // incorrect path", () => {
         tableObjectTestData.Images = "";
-        ExcelImporter.verifyLineImage(tableObjectTestData, 0, true).should.be.false;
+        ExcelImporter.verifyLineImage(tableObjectTestData, true).should.be.false;
         
-        tableObjectTestData.Images = "001.JPG";
-        ExcelImporter.verifyLineImage(tableObjectTestData, 0, true).should.be.true;
-        debugger;
+        tableObjectTestData.Images = "BAkso001.JPG";
+        ExcelImporter.verifyLineImage(tableObjectTestData, true).should.be.true;
         
         tableObjectTestData.Images = "notexisting.JPG";
-        ExcelImporter.verifyLineImage(tableObjectTestData, 0, true).should.be.false;
+        ExcelImporter.verifyLineImage(tableObjectTestData,  true).should.be.false;
       })
 
       it("Should have routes for live system", () => {

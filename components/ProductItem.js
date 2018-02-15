@@ -7,7 +7,8 @@ import ImageHelper from "../api/ImageHelper";
 
 const ProductItem = ({ article }) => {
 
-  const previewImage = ImageHelper.getAllImages(article)[0];
+  const previewImage = ImageHelper.getAllImages(article,true)[0];
+  console.log(previewImage);
   const categories = ImageHelper.getCategories(article);
 
   return (
