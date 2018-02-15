@@ -86,10 +86,7 @@ describe('ExcelImporter', () => {
 
       it("Should check for missing Category", () => {
         tableObjectTestData.Category = "";
-        debugger;
-
         ExcelImporter.verifyLine(tableObjectTestData, 0, true).should.be.false;
-        debugger;
       })
 
       it("Should check for missing Name", () => {

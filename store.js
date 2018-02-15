@@ -23,6 +23,7 @@ export const reducer = (state = initialState, action) => {
         case actionTypes.GetAllData:
             return action.payload;
             break;
+
         default: return state
     }
 }
@@ -31,8 +32,7 @@ export const reducer = (state = initialState, action) => {
 // TODO: rename to getData.
 export const getProducts = (isServer) => dispatch => {
     if (isServer) {
-        let products = ExcelImporter.LoadData(true);
-        console.log(products.length);
+        let products = ExcelImporter.LoadData();
         if (products){
             const categories = ExcelImporter.getCategories(products);
             let staticTexts = FileManager.ImportStaticTextFiles();
