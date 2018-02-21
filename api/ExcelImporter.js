@@ -30,40 +30,40 @@ class ExcelImporter {
         let worksheet = workbook.Sheets[first_sheet_name];
         let tableObjects = XLSX.utils.sheet_to_json(worksheet);
 
-        return this.verifyCompleteData(tableObjects,testFlag);
+        return this.verifyCompleteData(tableObjects, testFlag);
     }
 
     static importDropbox(callback) {
         FileManager.DownloadFile(this.dbPath, this.dbLocalPath, callback);
     }
 
-    static checkForDuplicates(tableObjects, testFlag){
-         // check for duplicates.
-         let importedRows = tableObjects.length;
-         let uniqRows = _.uniqBy(tableObjects, cellNames.ID).length;
-         let noDuplicateData = importedRows == uniqRows;
- 
-         let diff = _.difference(tableObjects, _.uniqBy(tableObjects, cellNames.ID));
-         if (diff.length > 0 && !testFlag)
-             console.error("Error, found duplicate ID: " + _.first(diff)[cellNames.ID]);
+    static checkForDuplicates(tableObjects, testFlag) {
+        // check for duplicates.
+        let importedRows = tableObjects.length;
+        let uniqRows = _.uniqBy(tableObjects, cellNames.ID).length;
+        let noDuplicateData = importedRows == uniqRows;
+
+        let diff = _.difference(tableObjects, _.uniqBy(tableObjects, cellNames.ID));
+        if (diff.length > 0 && !testFlag)
+            console.error("Error, found duplicate ID: " + _.first(diff)[cellNames.ID]);
 
         return noDuplicateData;
     }
 
     static verifyCompleteData(tableObjects, testFlag = false) {
-       
+
         let noDuplicateData = this.checkForDuplicates(tableObjects, testFlag);
-        let workingProducts =[];
-        
-        tableObjects.forEach((to,index) => {
-            if (this.verifyLine(to, index, testFlag)) 
-            workingProducts.push(to);
+        let workingProducts = [];
+
+        tableObjects.forEach((to, index) => {
+            if (this.verifyLine(to, index, testFlag))
+                workingProducts.push(to);
             else {
-                console.log("error",index);
+                console.log("error", index);
             }
         })
 
-        return noDuplicateData? workingProducts : [];
+        return noDuplicateData ? workingProducts : [];
     }
 
     static verifyLine(tableObjectRow, index, testFlag = false) {
@@ -127,12 +127,12 @@ class ExcelImporter {
         flatCategories.forEach(singleCategoryLine => {
             let catSplit = singleCategoryLine.split("-");
             let mainCategory = _.trim(catSplit[0]);
-            let sideCategory = (catSplit.length > 1) ? _.trim(catSplit[1]) : "";
+            let sideCategory = (catSplit.length > 1) ? _.trim(catSplit[1]) : null;
 
             let activeSubTree = _.find(categories, (obj) => { return obj.name == mainCategory });
             if (!activeSubTree) {
                 activeSubTree = { name: mainCategory }
-                activeSubTree.subCategories = [sideCategory];
+                if (sideCategory) { activeSubTree.subCategories = [sideCategory]; }
                 categories.push(activeSubTree);
             }
             else {

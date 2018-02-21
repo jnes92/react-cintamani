@@ -54,7 +54,7 @@ class ProductDetails extends React.Component {
                 <p className="info"> Anzahl: {product[cellNames.Quantity]}</p>
 
 
-                <p className="price">Preis : {product[cellNames.Price]} €</p>
+                <p className="price">Preis : {product[cellNames.Price]} </p>
 
                 <p className="text-center">
                   <button type="submit" className="btn btn-template-main"><i className="fa fa-shopping-cart"></i> Artikel anfragen</button>

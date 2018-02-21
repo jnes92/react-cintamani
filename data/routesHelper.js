@@ -25,11 +25,22 @@ class RoutesHelper {
     flatCategories.forEach((flatCategory) => {
       let main = _.trim(flatCategory.split("-")[0]);
       let side = _.trim(flatCategory.split("-")[1]);
-      let pathName = "/" + main + "/" + side;
-      routes[pathName] = {
-        page: '/category',
-        query: { main, side }
+      if (side){
+        let pathName = "/" + main + "/" + side;
+        routes[pathName] = {
+          page: '/category',
+          query: { main, side }
+        }
       }
+      else {
+        let pathName = "/" + main;
+        routes[pathName] = {
+          page: '/category',
+          query: { main }
+        }
+
+      }
+
     });
 
     // GetAllRoutes for product.js (All Products Directlink)
