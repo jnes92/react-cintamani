@@ -24,10 +24,10 @@ const Layout = (props) => {
       </Head>
       <Grid fluid className='main-grid'>
         <Row>
-          <Col xs={0} md={3} lg={2} className="no-padding">
+          <Col xs={false} md={3} lg={2} className={props.noPadding ? "no-padding" : ""}>
             <CategoriesList categories={props.categories} staticTexts={props.staticTexts} />
           </Col>
-          <Col xs={12} md={9} lg={10} className="no-padding">
+          <Col xs={12} md={9} lg={10} className={props.noPadding ? "no-padding" : ""}>
             {props.children}
           </Col>
         </Row>
