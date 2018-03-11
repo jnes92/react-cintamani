@@ -85,6 +85,11 @@ class ExcelImporter {
             errorsInLine++;
         }
 
+        if (tableObjectRow[cellNames.Quantity] === '0'){
+            console.error("Warning, product in line " + (index + 1 ) + " is not in Stock." );
+            errorsInLine++;
+        }
+
         if (errorsInLine == 0) return true;
         else {
             return false;
