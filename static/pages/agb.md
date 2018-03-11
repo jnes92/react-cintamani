@@ -1,52 +1,41 @@
 # Allgemeine Geschäftsbedingungen
 
-Privatsphäre und Datenschutz
-  
-Wir verwenden Ihre Bestandsdaten ausschließlich zur Abwicklung Ihrer Bestellung. Alle Kundendaten werden unter Beachtung der einschlägigen Vorschriften der Bundesdatenschutzgesetze (BDSG) und des Teledienstdatenschutzgesetzes (TDDSG) von uns gespeichert und verarbeitet.
+## Liefer- und Versandkosten
 
-Auskünfte:
-
-Sie haben jederzeit ein Recht auf kostenlose Auskunft, Berichtigung, Sperrung und Löschung Ihrer gespeicherten Daten. Bitte wenden Sie sich an Cintamani .
-
-Weitergabe an Dritte:
-
-Wir geben Ihre personenbezogenen Daten einschließlich Ihrer Hausadresse und E-Mail-Adresse nicht ohne Ihre ausdrückliche und jederzeit widerrufliche Einwilligung an Dritte weiter. Ausgenommen hiervon sind unsere Dienstleistungspartner, die zur Bestellabwicklung die Übermittlung von Daten benötigen (z.B. das mit der Lieferung beauftragte Versandunternehmen und das mit der Zahlungsabwicklung beauftragte Kreditinstitut). In diesen Fällen beschränkt sich der Umfang der übermittelten Daten jedoch nur auf das erforderliche Minimum.
-
-Cookies:
-
-In diesem Shop werden in den Cookies Informationen über Ihre Kundendaten gespeichert, die dann bei Ihren nächsten Besuchen aufgerufen werden können. Die in einem Cookie abgelegten Daten erübrigen Ihnen das wiederholte Ausfüllen der Formulare.
-
- 
-
-Liefer- und Versandkosten
-
- 
- 
 Innerhalb Deutschland:
-Bei Bestellungen unter 60,- Euro berechnen wir den aktuellen Versandpreis als Paket, zur Zeit beträgt dieser pauschal 6,99- Euro.
+Bei Bestellungen unter **60,- Euro** berechnen wir den aktuellen Versandpreis als Paket, zur Zeit beträgt dieser pauschal **5,99- Euro**.
 Ab einem Bestellwert von 60,- Euro erfolgt die Lieferung Versandkostenfrei. 
 Der Versand erfolgt versichert.
 
 Bei Bestellungen außerhalb Deutschlands nehmen Sie bitte zu uns Kontakt auf
 
- 
-Allgemeine Geschäftsbedingungen
+
+## Privatsphäre und Datenschutz
+  
+Wir verwenden Ihre Bestandsdaten ausschließlich zur Abwicklung Ihrer Bestellung. Alle Kundendaten werden unter Beachtung der einschlägigen Vorschriften der Bundesdatenschutzgesetze (BDSG) und des Teledienstdatenschutzgesetzes (TDDSG) von uns gespeichert und verarbeitet.
+
+## Auskünfte:
+
+Sie haben jederzeit ein Recht auf kostenlose Auskunft, Berichtigung, Sperrung und Löschung Ihrer gespeicherten Daten. Bitte wenden Sie sich an Cintamani .
+
+## Weitergabe an Dritte:
+
+Wir geben Ihre personenbezogenen Daten einschließlich Ihrer Hausadresse und E-Mail-Adresse nicht ohne Ihre ausdrückliche und jederzeit widerrufliche Einwilligung an Dritte weiter. Ausgenommen hiervon sind unsere Dienstleistungspartner, die zur Bestellabwicklung die Übermittlung von Daten benötigen (z.B. das mit der Lieferung beauftragte Versandunternehmen und das mit der Zahlungsabwicklung beauftragte Kreditinstitut). In diesen Fällen beschränkt sich der Umfang der übermittelten Daten jedoch nur auf das erforderliche Minimum.
+
+## Cookies:
+
+In diesem Shop werden in den Cookies Informationen über Ihre Kundendaten gespeichert, die dann bei Ihren nächsten Besuchen aufgerufen werden können. Die in einem Cookie abgelegten Daten erübrigen Ihnen das wiederholte Ausfüllen der Formulare.
 
  
- 
 
+## Allgemeine Geschäftsbedingungen
 
-Unsere Angebote auf dieser Homepage sind freibleibend und unverbindlich. Die Preise beinhalten die momentan aktuelle Mehrwertsteuer.
+Unsere Angebote auf dieser Homepage sind freibleibend und unverbindlich. Die Preise beinhalten die aktuelle Mehrwertsteuer.
 
 Zahlungskonditionen:
 
 Bitte haben Sie Verständnis dafür, dass wir die Ware nur nach Vorauskasse ausliefern.
 
-Versand:
-
-Bei Bestellungen unter 60 Euro berechnen wir den aktuellen Versandpreis als Paket, zur Zeit pauschal 6,99 Euro.
-Ab einem Bestellwert von 60,- Euro erfolgt die Lieferung Versandkostenfrei. 
-Der Versand erfolgt versichert.
 
 Vorbehalt bei Nichtverfügbarkeit:
 

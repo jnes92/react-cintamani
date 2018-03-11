@@ -38,7 +38,7 @@ class Product extends React.Component {
                 <div>
                     <span> {mainCategory} > {sideCategory} > {chosenProduct[cellNames.Name]} </span>
                 </div>
-                <ProductDetails product={chosenProduct} />
+                <ProductDetails product={chosenProduct} category={sideCategory}/>
             </Layout>
         )
 
