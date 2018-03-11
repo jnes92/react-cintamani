@@ -35,7 +35,7 @@ const CategoryText = ({ name }) => {
 
 const CategoryTextLayout = ({ name }) => (
     <div style={{
-        height: "200px",
+        maxHeight: "200px",
         overflowY: "auto"
     }}>
         <CategoryText name={name} />
