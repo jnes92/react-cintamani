@@ -28,7 +28,7 @@ class Category extends React.Component {
         const filteredProducts = _.filter(this.props.products, (item) => {
             let isMainCat = item[cellNames.Category].includes(main);
             let isSideCat = item[cellNames.Category].includes(side);
-            if (isMainCat && isSideCat)
+            if ((isMainCat && isSideCat) || (isMainCat && !side) )
                 return item;
         });
 
@@ -40,7 +40,7 @@ class Category extends React.Component {
                 </div>
 
                 <p className="lead">
-                    Kategoriebeschreibung für {main}, {side} </p>
+                    Kategoriebeschreibung für {main} {side && <span> , {side} </span>} </p>
                 <Grid fluid>
                     <Row xs md lg>
                         {filteredProducts ?

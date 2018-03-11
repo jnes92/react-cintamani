@@ -6,8 +6,8 @@ import RoutesHelper from "../../data/routesHelper";
 
 var assert = chai.assert, expect = chai.expect, should = chai.should();
 
-const actualDataSize = 4;
-const actualUniqueGroups = 4;
+const actualDataSize = 5;
+const actualUniqueGroups = 5;
 const testDataPath = "./test/data/products_test.xlsx";
 
 
@@ -49,6 +49,7 @@ describe('ExcelImporter', () => {
 
       const expectedOutput = [
         { name: "Buddhas", subCategories: ["Aksobhya", "Shakyamuni"] },
+        { name: "Klangschalen"},
         { name: "Malas", subCategories: ["Arm Mala"] },
         { name: "Thangkas", subCategories: ["big Tsagil"] }
       ];

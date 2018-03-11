@@ -21,6 +21,7 @@ class Home extends React.Component {
             <Layout
                 categories={this.props.categories}
                 staticTexts={this.props.staticTexts}
+                noPadding
             >
                 <style>
                     {styles}

@@ -8,7 +8,8 @@ class ImageHelper {
     static fakePicturePath = false;
 
     static getImagePath(main, side, image) {
-        const imagePath = "/static/images/products/" + main + "/" + side + "/" + image;
+        const imagePathFull = "/static/images/products/" + main + "/" + side + "/" + image;
+        const imagePathMainOnly = "/static/images/products/" + main + "/" + image;
 
 
         if(this.fakePicturePath){
@@ -18,7 +19,8 @@ class ImageHelper {
             return "/static/images/products/" + testMain + "/" + testSide + "/" + testImage;
         }
 
-        return imagePath;
+        if (side) return imagePathFull;
+        if (!side) return imagePathMainOnly;
     }
 
     static getAllImagesAsShortString(imagesString){
@@ -36,8 +38,12 @@ class ImageHelper {
 
         let imagesLong = [];
         imagesShort.forEach((shortString) => {
-            if (includeCategorySortString)
+            if (includeCategorySortString){
+                if (categories.sideCategory)
                 imagesLong.push(this.getImagePath(categories.mainCategory,categories.sideCategory, shortString));
+                else 
+                imagesLong.push(this.getImagePath(categories.mainCategory, null, shortString));
+            }
             else imagesLong.push('/static/images/products/' + shortString);
             });
 
