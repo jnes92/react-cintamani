@@ -33,10 +33,10 @@ class ProductDetails extends React.Component {
 
 
     const emailSubject = encodeURIComponent('cintamani-buddhas.de: Kaufanfrage');
-    const emailStartText= 'Ich interessiere mich für den folgenden Artikel: \r\n'
-    const articleInfoLine = 'Artikelnummer: ' + product[cellNames.ID] 
-                          + ' Name: ' + product[cellNames.Name] 
-                          + ' Preis: '+ product[cellNames.Price];
+    const emailStartText = 'Ich interessiere mich für den folgenden Artikel: \r\n'
+    const articleInfoLine = 'Artikelnummer: ' + product[cellNames.ID]
+      + ' Name: ' + product[cellNames.Name]
+      + ' Preis: ' + product[cellNames.Price];
 
     const emailEndText = 'Bitte geben Sie nachfolgend ihre Kontaktinformationen und ihre Adressdaten ein:'
     const emailBody = encodeURIComponent(emailStartText + articleInfoLine + "\r\n \r\n \r\n" + emailEndText);
@@ -55,18 +55,18 @@ class ProductDetails extends React.Component {
 
             <div className="box" style={{ padding: "10px" }}>
               <form lpformnum="1">
-                <p className="info" style={{fontWeight: 'bold'}}> Kategorie: {product[cellNames.Category]}</p>
-                  <p> <em>
-                    <CategoryText name={this.props.category} />
-                  </em></p>
+                <p className="info" style={{ fontWeight: 'bold' }}> Kategorie: {product[cellNames.Category]}</p>
+                <p> <em>
+                  <CategoryText name={this.props.category} />
+                </em></p>
                 <h4> Beschreibung </h4>
-                  <p><em> {product[cellNames.Description]} </em> </p>
+                <p><em> {product[cellNames.Description]} </em> </p>
                 <p className="info"> Anzahl: {product[cellNames.Quantity]}</p>
                 <p className="price">Preis : {product[cellNames.Price]} </p>
                 <p className="text-center">
                   <button type="submit" className="btn btn-template-main">
-                  <a href={sendToLink}>
-                  <i className="fa fa-shopping-cart"></i> Artikel anfragen
+                    <a href={sendToLink}>
+                      <i className="fa fa-shopping-cart"></i> Artikel anfragen
                   </a>
                   </button>
                 </p>

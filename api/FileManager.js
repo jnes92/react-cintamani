@@ -55,7 +55,7 @@ class FileManager {
         const pageNames = [
             { data: "agb", name: "AGB´s" }, 
             // { data: "imprint", name: "Impressum" }, //TODO: ADD IMPRINT            
-            { data: "about", name: "Über cintamani" },             
+            { data: "about", name: "Über cintamani-buddhas.de" },             
         ];
 
         let pages =[];

@@ -15,9 +15,10 @@ const TextTara = 'Tara bedeutet übersetzt "Stern" oder "Befreierin". Tara ersch
 const TaraGruen = 'Die Grüne Tara ( Syama Tara ) Die Grüne Tara bedeutet "grüne Retterin". Sie steht in enger Verbindung zum Dhyani Buddha Amoghasiddhi, als dessen Weisheitsgefährtin sie gilt. Die Grüne Tara erscheint in entspannter Sitzhaltung: Sie sitzt, das rechte Bein ausge- streckt und das linke angewinkelt, auf einem Lotos der sich aus einem See erhebt. Der Legende nach soll sie aus einem See von Tränen Avalokitesvaras entstanden sein. Ihre Körperfarbe ist grün, womit Ihre Zugehörigkeit zum Windelement dargestellt wird ( steht für Bewegung ). Das Windelement drückt aus, dass die Grüne Tara ein aktives Prinzip des Mitgefühls darstellt. Durch diese Aktivität werden alle weltlichen und über- weltlichen Handlungen, die zum Wohle anderer sind, voll zur Blüte gebracht. Das angewinkelte Bein symbolisiert ihr Verweilen im Zustand der Nicht-Dualität aller Erscheinungen. Das ausgestreckte Bein verdeutlicht ihre Bereitschaft, jederzeit zum Nutzen der fühlenden Wesen in Aktion zu treten. Ihre linke Hand formt die Mudra der Zufluchtsgewährung. Ihr Daumen und ihr Ringfinger berühren einander als Zeichen für die Vereinigung von Methode und Weisheit. Die drei übrigen Finger sind erhoben als Symbol für die drei Zufluchten Buddha, Dharma und Shanga . TARA Tara bedeutet übersetzt "Stern" oder "Befreierin". Tara erscheint in fünf Hauptaspekten, der Weißen, Grünen, Blauen, Gelben und Roten Tara. Bekannt ist auch eine Aufteilung in 21 verschiedene Formen, die als "die regenbogenfarbenen Taras" bezeichnet werden. Jede der Regenbogenfarben steht für eine andere Buddha-Aktivität der Tara. Deshalb wird die Tara auch als Verkörperung der vielfältigen Heilsaktivitäten der Erleuchteten betrachtet. Da sie dadurch unendlich vielen Wesen den Weg zur Erleuchtung eröffnet, nennt man sie auch "Mutter aller Buddhas".'
 
 const CategoryText = ({ name }) => {
+    console.log(name);
     switch (name) {
         case 'Aksobhya': return <div> {TextAksobhya} </div>;
-        case 'Amithaba': return <div> {TextAmithaba} </div>;
+        case 'Amitabha': return <div> {TextAmithaba} </div>;
         case 'Amoghasidi': return <div> {TextAmoghasidi} </div>;
         case 'Shakyamuni': return <div> {TextShakyamuni} </div>;
         case 'Maitreya': return <div> {TextMaitreya} </div>;
@@ -27,7 +28,7 @@ const CategoryText = ({ name }) => {
         case 'Avalokitesvara': return <div> {TextAvalokitesvara} </div>;
         case 'Manjusri': return <div> {Manjusri} </div>;
         case 'Natha Maitreya': return <div> {NathaMaitreya} </div>;
-        case 'Tara': return <div> {TextTara} </div>;
+        case 'Weiße Tara (Sitatara)': return <div> {TextTara} </div>;
         case 'Gruene Tara (Syamatara)': return <div> {TaraGruen} </div>;
         default: return null;
     }
