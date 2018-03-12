@@ -1,4 +1,4 @@
-# Über uns
+﻿# Über uns
 
 Liebe Freundinnen und Freunde der buddhistischen Kunst,
 
@@ -12,7 +12,7 @@ Konto:480027800
 BLZ:50080000
 Dresdner Bank Frankfurt
  
-An diese beiden Kinderhäuser hat Cintamani aus einem Tei des Erlöses in den vergangen Jahren 5500 Euro gespendet.
+An diese beiden Kinderhäuser hat Cintamani aus einem Teil des Erlöses in den vergangen Jahren 5500 Euro gespendet.
 
 Das besondere an Cintamani-Buddhas.de:
 
