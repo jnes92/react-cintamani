@@ -19,10 +19,9 @@ describe('FileManager', () => {
 
         it("Should ImportStaticTextFiles", () => {
             let firstLineTextAbout = "# Über uns";
-            let aboutIndex = 1; // about.md in array["agbs","about"]
+            let aboutIndex = 2; // about.md in array["agbs","about"]
             let texts = FileManager.ImportStaticTextFiles();
-            texts.should.have.length(2);
-            // texts.should.have.length(3); // TODO: ADD IMPRINT!!
+            texts.should.have.length(3); 
             let firstLineImported = texts[aboutIndex].content.split("\n")[0];
             expect(firstLineImported).to.include(firstLineTextAbout);
         });
