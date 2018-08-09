@@ -1,9 +1,7 @@
 import { createStore, applyMiddleware } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
 import thunkMiddleware from 'redux-thunk'
 
 import ExcelImporter from "./api/ExcelImporter";
-import cellNames from "./data/productsCellNames";
 import RoutesHelper from "./data/routesHelper";
 import FileManager from './api/FileManager';
 
@@ -17,7 +15,6 @@ export const actionTypes = {
     GetAllData: 'GetAllData',
 }
 
-// REDUCERS
 export const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.GetAllData:
@@ -28,8 +25,6 @@ export const reducer = (state = initialState, action) => {
     }
 }
 
-// ACTIONS
-// TODO: rename to getData.
 export const getProducts = (isServer) => dispatch => {
     if (isServer) {
         let products = ExcelImporter.LoadData();
@@ -48,5 +43,5 @@ export const getProducts = (isServer) => dispatch => {
 }
 
 export const initStore = (initialState = initialState) => {
-    return createStore(reducer, initialState, composeWithDevTools(applyMiddleware(thunkMiddleware)))
+    return createStore(reducer, initialState, applyMiddleware(thunkMiddleware))
 }

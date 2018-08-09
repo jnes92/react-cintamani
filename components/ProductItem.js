@@ -29,7 +29,6 @@ const ProductItem = ({ article }) => {
           <p className="buttons">
 
             <a className="btn btn-default">Details</a>
-            {/* <a href="shop-basket.html" className="btn btn-template-main"><i className="fa fa-shopping-cart"></i>Add to cart</a> */}
           </p>
 
         </div>

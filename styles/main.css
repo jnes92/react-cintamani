@@ -1,0 +1,17 @@
+.main-grid{
+    height: 100vh !important;
+    padding: 0 !important;
+
+    Row {
+        height: "100vh";
+    }
+
+
+    .no-padding {
+        padding:0 !important;
+        margin:0 !important;
+    }
+}
+::-webkit-scrollbar { 
+    display: none; 
+}

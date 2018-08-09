@@ -9,6 +9,13 @@ app.prepare()
     .then(() => {
         const server = express()
 
+        server.get('/info/:title', (req, res) => {
+            const actualPage = '/info'
+            const queryParams =  {title:req.params.title}
+            app.render(req, res, actualPage, queryParams)
+        })
+
+
         server.get('/:main/:side', (req, res) => {
             let actualPage, queryParams;
             if (isNaN(req.params.side)){

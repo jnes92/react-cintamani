@@ -1,40 +1,44 @@
-import React from 'react'
-import CategoriesList from './CategoriesList'
-import { Grid, Col, Row } from 'react-styled-flexboxgrid'
-import Head from 'next/head'
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import main from "../styles/main.scss"
-import normalize from "../styles/normalize.css"
-import menuStyle from "../styles/menu.scss";
+import Footer from "./Footer";
+import Head from "next/head";
 
+import main from "../styles/main.css";
+import normalize from "../styles/normalize.css";
+import bulma from "bulma/css/bulma.css";
+import Navigation from "./navigation";
 
-const Layout = (props) => {
-  return (
-    <div>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta charSet="utf-8" />
-        <script src="https://use.fontawesome.com/7e6f9ff058.js"></script>
-        <style global="true">
-          {`
+class Layout extends Component {
+  render() {
+    return (
+      <div>
+        <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta charSet="utf-8" />
+          <script src="https://use.fontawesome.com/7e6f9ff058.js" />
+          <style global="true">
+            {`
     ${main}
-    ${normalize} ${menuStyle}
+    ${normalize}
+    ${bulma}
     `}
-        </style>
-      </Head>
-      <Grid fluid className='main-grid'>
-        <Row>
-          <Col xs={false} md={3} lg={2} className={props.noPadding ? "no-padding" : ""}>
-            <CategoriesList categories={props.categories} staticTexts={props.staticTexts} />
-          </Col>
-          <Col xs={12} md={9} lg={10} className={props.noPadding ? "no-padding" : ""}>
-            {props.children}
-          </Col>
-        </Row>
-      </Grid>
-
-    </div>
-  )
+          </style>
+        </Head>
+        <Navigation categories={this.props.categories} />
+        {this.props.children}
+        <Footer staticTexts={this.props.staticTexts} />
+      </div>
+    );
+  }
 }
 
-export default Layout
+const mapStateToProps = ({ products, categories, staticTexts }) => {
+  return {
+    products,
+    categories,
+    staticTexts
+  };
+};
+
+export default connect(mapStateToProps)(Layout);

@@ -1,23 +1,15 @@
 import React from 'react'
-import withRedux from 'next-redux-wrapper'
-import { bindActionCreators } from 'redux'
-import { initStore, getProducts } from '../store'
+import { getProducts } from '../store'
+import {connect} from "react-redux";
 import _ from "lodash";
-import { Grid, Col, Row } from 'react-styled-flexboxgrid'
-
 
 import Layout from '../components/MyLayout.js'
 import ProductItem from '../components/ProductItem';
-
-
-import ExcelImporter from "../api/ExcelImporter";
 import cellNames from "../data/productsCellNames";
-
 import productStyles from "../styles/category.css"
 
-
 class Category extends React.Component {
-    static async getInitialProps(props) {
+    static getInitialProps(props) {
         const { query: { main, side }, store, isServer } = props;
         store.dispatch(getProducts(isServer))
         return { route: { main, side } }
@@ -28,35 +20,34 @@ class Category extends React.Component {
         const filteredProducts = _.filter(this.props.products, (item) => {
             let isMainCat = item[cellNames.Category].includes(main);
             let isSideCat = item[cellNames.Category].includes(side);
-            if ((isMainCat && isSideCat) || (isMainCat && !side) )
+            if ((isMainCat && isSideCat) || (isMainCat && !side))
                 return item;
         });
 
         return (
-            <Layout categories={this.props.categories}>
+            <Layout>
                 <style> {productStyles} </style>
-                <div>
-                    <span> {main} > {side} </span>
-                </div>
+                <div className="container">
+                    <nav className="breadcrumb is-centered" aria-label="breadcrumbs">
+                        <ul>
+                            <li><a href="#">{main}</a></li>
+                            <li className="is-active"><a href="#" aria-current="page">{side}</a></li>
+                        </ul>
+                    </nav>
 
-                <p className="lead">
-                    Kategoriebeschreibung für {main} {side && <span> , {side} </span>} </p>
-                <Grid fluid>
-                    <Row xs md lg>
+                    <div className="columns is-multiline">
                         {filteredProducts ?
                             filteredProducts.map((product, index) => (
-                                <Col key={product[cellNames.ID]} xs={12} md={6} lg={3}>
+                                <div className="column is-full-mobile is-one-third-tablet is-one-quarter-desktop">
                                     <ProductItem article={product} />
-                                </Col>
+                                </div>
                             ))
                             : (<div> Imported dataset is wrong </div>)
                         }
-                    </Row>
-                </Grid>
+                    </div>
+                </div>
             </Layout>
         )
-
-
     }
 }
 
@@ -66,9 +57,4 @@ const mapStateToProps = ({ products, categories }) => {
         categories
     }
 }
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getProducts: bindActionCreators(getProducts, dispatch),
-    }
-}
-export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(Category)
+export default connect(mapStateToProps)(Category)
