@@ -12,7 +12,7 @@ import Navigation from "./navigation";
 class Layout extends Component {
   render() {
     return (
-      <div>
+      <div className="has-navbar-fixed-bottom">
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta charSet="utf-8" />

@@ -4,7 +4,6 @@ dist/
 out/
 test-output/
 
-routes.json
 data/products_db.xlsx
 test/data/FileLoader-donwload.xlsx
 test/data/FileLoader-write.txt

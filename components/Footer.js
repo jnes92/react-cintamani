@@ -5,7 +5,7 @@ const Footer = (props) => {
     const { staticTexts } = props;
     if (!staticTexts) return (<div>  </div>);
     return (
-        <footer className="footer">
+        <footer className="footer is-dark">
             <div className="content has-text-centered">
 
                 <div className="columns">

@@ -45,7 +45,8 @@ class ProductDetails extends React.Component {
 
     return (
       <div className="container">
-        <h1> {product[cellNames.Name]} </h1>
+      <div className="section">
+        <h1 className="title has-text-centered"> {product[cellNames.Name]} </h1>
         <div className="columns is-multiline">
           <div className="column is-half-tablet is-full-mobile">
             <div id="mainImage">
@@ -71,7 +72,7 @@ class ProductDetails extends React.Component {
               <p className="info"> Anzahl: {product[cellNames.Quantity]}</p>
               <p className="price">Preis : {product[cellNames.Price]} </p>
               <p className="text-center">
-                <button type="submit" className="btn btn-template-main">
+                <button type="submit" className="button is-rounded is-info is-outlined">
                   <a href={sendToLink}>
                     <i className="fa fa-shopping-cart" /> Artikel anfragen
                   </a>
@@ -88,6 +89,8 @@ class ProductDetails extends React.Component {
           </div>
         </div>
       </div>
+      </div>
+
     );
   }
 }

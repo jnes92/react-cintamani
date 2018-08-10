@@ -24,7 +24,7 @@ class Navigation extends Component {
         }
     }
     createMenuItems() {
-        const { categories, staticTexts } = this.props;
+        const { categories} = this.props;
 
         return categories.map(mainCategory => {
             if (mainCategory.subCategories) {
@@ -38,8 +38,6 @@ class Navigation extends Component {
         })
 
     }
-
-
 
     createNavBarItems(mainCategory) {
         return mainCategory.subCategories.map(item => this.createNavBarItem(item, mainCategory.name));
@@ -73,11 +71,12 @@ class Navigation extends Component {
 
     render() {
         return (
-            <nav className="navbar" role="navigation" aria-label="main navigation">
+            <nav className="navbar is-dark is-fixed-top" role="navigation" aria-label="main navigation">
+
                 <div className="navbar-brand">
                     <Link href={`/`} >
                         <div className="navbar-item" >
-                            <img src="/static/images/logo.png" alt="Cintamani-Buddhas.de" height="100%" />
+                            <img src="/static/images/logo.png" alt="Cintamani-Buddhas.de" width="180px" />
                         </div>
                     </Link>
                     <a onClick={this.toggleMenu} role="button"
