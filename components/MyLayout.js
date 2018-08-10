@@ -12,7 +12,7 @@ import Navigation from "./navigation";
 class Layout extends Component {
   render() {
     return (
-      <div className="has-navbar-fixed-bottom">
+      <div>
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta charSet="utf-8" />
@@ -25,8 +25,12 @@ class Layout extends Component {
     `}
           </style>
         </Head>
-        <Navigation categories={this.props.categories} />
-        {this.props.children}
+        <div className="section has-navbar-fixed-bottom">
+          <Navigation categories={this.props.categories} />
+          <section className="section">
+            <div className="container">{this.props.children}</div>
+          </section>
+        </div>
         <Footer staticTexts={this.props.staticTexts} />
       </div>
     );

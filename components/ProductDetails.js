@@ -44,8 +44,7 @@ class ProductDetails extends React.Component {
     const sendToLink = `mailto:christianoesterle@gmx.de?subject=${emailSubject}&body=${emailBody}`;
 
     return (
-      <div className="container">
-      <div className="section">
+      <section>
         <h1 className="title has-text-centered"> {product[cellNames.Name]} </h1>
         <div className="columns is-multiline">
           <div className="column is-half-tablet is-full-mobile">
@@ -64,7 +63,7 @@ class ProductDetails extends React.Component {
                 Kategorie: {product[cellNames.Category]}
               </p>
               <CategoryText name={this.props.category} />
-    
+
               <h4> Beschreibung </h4>
               <p>
                 <em> {product[cellNames.Description]} </em>
@@ -72,7 +71,10 @@ class ProductDetails extends React.Component {
               <p className="info"> Anzahl: {product[cellNames.Quantity]}</p>
               <p className="price">Preis : {product[cellNames.Price]} </p>
               <p className="text-center">
-                <button type="submit" className="button is-rounded is-info is-outlined">
+                <button
+                  type="submit"
+                  className="button is-rounded is-info is-outlined"
+                >
                   <a href={sendToLink}>
                     <i className="fa fa-shopping-cart" /> Artikel anfragen
                   </a>
@@ -88,9 +90,7 @@ class ProductDetails extends React.Component {
             </div>
           </div>
         </div>
-      </div>
-      </div>
-
+      </section>
     );
   }
 }
