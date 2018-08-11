@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 import _ from "lodash";
-import { Grid, Col, Row } from 'react-styled-flexboxgrid'
 
 import cellNames from "../data/productsCellNames";
 import ImageHelper from "../api/ImageHelper";
-import PaymentInfo from './PaymentInfo';
-import CategoryText from './categoryText';
+import PaymentInfo from "./PaymentInfo";
+import CategoryText from "./categoryText";
+import ProductDetailsImages from "./ProductDetailsImages";
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class ProductDetails extends React.Component {
     this.state = {
       images: ImageHelper.getAllImages(props.product, true),
       activeImage: ImageHelper.getAllImages(props.product, true)[0]
-    }
+    };
   }
 
   setActiveImage(imagePath) {
@@ -23,70 +23,76 @@ class ProductDetails extends React.Component {
 
   render() {
     const { product } = this.props;
-    const displayImageList = this.state.images.map((imgPath) =>
-      <Col xs={6} md={4} lg={3} key={"imageGallery" + imgPath}>
-        <a onClick={() => this.setActiveImage(imgPath)}>
-          <img className="img img-responsive" src={imgPath} style={{ maxWidth: "100%" }} />
-        </a>
-      </Col>
+    const emailSubject = encodeURIComponent(
+      "cintamani-buddhas.de: Kaufanfrage"
     );
+    const emailStartText =
+      "Ich interessiere mich für den folgenden Artikel: \r\n";
+    const articleInfoLine =
+      "Artikelnummer: " +
+      product[cellNames.ID] +
+      " Name: " +
+      product[cellNames.Name] +
+      " Preis: " +
+      product[cellNames.Price];
 
-
-    const emailSubject = encodeURIComponent('cintamani-buddhas.de: Kaufanfrage');
-    const emailStartText = 'Ich interessiere mich für den folgenden Artikel: \r\n'
-    const articleInfoLine = 'Artikelnummer: ' + product[cellNames.ID]
-      + ' Name: ' + product[cellNames.Name]
-      + ' Preis: ' + product[cellNames.Price];
-
-    const emailEndText = 'Bitte geben Sie nachfolgend ihre Kontaktinformationen und ihre Adressdaten ein:'
-    const emailBody = encodeURIComponent(emailStartText + articleInfoLine + "\r\n \r\n \r\n" + emailEndText);
-    const sendToLink = `mailto:christianoesterle@gmx.de?subject=${emailSubject}&body=${emailBody}`
+    const emailEndText =
+      "Bitte geben Sie nachfolgend ihre Kontaktinformationen und ihre Adressdaten ein:";
+    const emailBody = encodeURIComponent(
+      emailStartText + articleInfoLine + "\r\n \r\n \r\n" + emailEndText
+    );
+    const sendToLink = `mailto:christianoesterle@gmx.de?subject=${emailSubject}&body=${emailBody}`;
 
     return (
-      <div>
-        <h1> {product[cellNames.Name]} </h1>
-        <Row>
-          <Col xs={12} md={6}>
+      <section>
+        <h1 className="title has-text-centered"> {product[cellNames.Name]} </h1>
+        <div className="columns is-multiline">
+          <div className="column is-half-tablet is-full-mobile">
             <div id="mainImage">
-              <img className="img img-responsive" src={this.state.activeImage} style={{ maxWidth: "100%" }} />
+              <img
+                className="img img-responsive"
+                src={this.state.activeImage}
+                style={{ maxWidth: "100%" }}
+              />
             </div>
-          </Col>
-          <Col xs={12} md={6}>
+          </div>
 
-            <div className="box" style={{ padding: "10px" }}>
-              <form lpformnum="1">
-                <p className="info" style={{ fontWeight: 'bold' }}> Kategorie: {product[cellNames.Category]}</p>
-                <p> <em>
-                  <CategoryText name={this.props.category} />
-                </em></p>
-                <h4> Beschreibung </h4>
-                <p><em> {product[cellNames.Description]} </em> </p>
-                <p className="info"> Anzahl: {product[cellNames.Quantity]}</p>
-                <p className="price">Preis : {product[cellNames.Price]} </p>
-                <p className="text-center">
-                  <button type="submit" className="btn btn-template-main">
-                    <a href={sendToLink}>
-                      <i className="fa fa-shopping-cart"></i> Artikel anfragen
+          <div className="column is-half-tablet is-full-mobile">
+            <div className="content" style={{ padding: "10px" }}>
+              <p className="info" style={{ fontWeight: "bold" }}>
+                Kategorie: {product[cellNames.Category]}
+              </p>
+              <CategoryText name={this.props.category} />
+
+              <h4> Beschreibung </h4>
+              <p>
+                <em> {product[cellNames.Description]} </em>
+              </p>
+              <p className="info"> Anzahl: {product[cellNames.Quantity]}</p>
+              <p className="price">Preis : {product[cellNames.Price]} </p>
+              <p className="text-center">
+                <button
+                  type="submit"
+                  className="button is-rounded is-info is-outlined"
+                >
+                  <a href={sendToLink}>
+                    <i className="fa fa-shopping-cart" /> Artikel anfragen
                   </a>
-                  </button>
-                </p>
-              </form>
+                </button>
+              </p>
             </div>
-            <Row style={{ padding: "10px" }}>
+            <div className="section">
+              <ProductDetailsImages
+                images={this.state.images}
+                setActiveImage={this.setActiveImage.bind(this)}
+              />
               <PaymentInfo />
-            </Row>
-            {this.state.images.length > 1 ?
-              <Row className="box">
-                {displayImageList}
-              </Row> : null
-            }
-          </Col>
-
-        </Row>
-      </div>
-    )
+            </div>
+          </div>
+        </div>
+      </section>
+    );
   }
 }
-
 
 export default ProductDetails;

@@ -5,8 +5,12 @@ import withRedux from 'next-redux-wrapper'
 
 import ReactMarkdown from "react-markdown";
 
-export default ({content}) => {
+export default ({ content }) => {
     return (
-        <ReactMarkdown source={content} />
+        <div className="container">
+            <div className="content">
+                <ReactMarkdown source={content} />
+            </div>
+        </div>
     )
 }

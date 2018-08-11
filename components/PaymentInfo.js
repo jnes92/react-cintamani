@@ -1,7 +1,7 @@
 import React from 'react'
 
 const PaymentInfo = () => (
-    <div>
+    <div className="content">
         <h3> Info über die Bestellung </h3>
         <p> Mit Ihrem Kauf unterstützen Sie Waisenkinder in Nepal und fördern die Erhaltung der traditionellen Handwerkskunst (siehe Seite: über Cintamani).  </p>
         <p> Ab einem Bestellwert von 60 Euro ist der Versand kostenlos </p>

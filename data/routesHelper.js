@@ -4,9 +4,6 @@ import FileManager from "../api/FileManager"
 import ExcelImporter from "../api/ExcelImporter";
 import cellNames from "./productsCellNames";
 
-/*
-Should be called only by server once !!
-*/
 class RoutesHelper {
   static GetRoutes() {
     const importedProducts = ExcelImporter.LoadData();
@@ -15,10 +12,9 @@ class RoutesHelper {
     // Get Home, Static Routes: index.js
     let routes = {
       '/': { page: '/' },
-      '/agb': { page: '/agb' },
-      // '/imprint': { page: '/imprint' },
-      '/about': { page: '/about' },
-      /// TODO: Add Static Routes like impressum, etc.
+      '/info/agb': { page: '/info', query: {title: 'agb'} },
+      '/info/about': { page: '/info', query: {title: 'about'} },
+      '/info/imprint': { page: '/info', query: {title: 'imprint'} },
     }
 
     // Get All Routes for category.js (ProductLists)
