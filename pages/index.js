@@ -7,10 +7,10 @@ class Home extends React.Component {
   static getInitialProps({ store, isServer }) {
     store.dispatch(getProducts(isServer));
   }
-  
+
   render() {
     return (
-      <Layout>
+      <div>
         <section
           className="hero is-fullheight"
           style={{
@@ -25,7 +25,8 @@ class Home extends React.Component {
             </div>
           </div>
         </section>
-      </Layout>
+        <Layout />
+      </div>
     );
   }
 }
