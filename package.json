@@ -1,8 +1,8 @@
 {
   "name": "cintamani-next",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "1.1.0",
   "license": "MIT",
+  "engines" : { "node" : ">=7.5.0" },
   "scripts": {
     "test": "mocha -c @babel/register --reporter spec test/ --recursive",
     "jest": "NODE_ENV=test jest",

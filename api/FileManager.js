@@ -8,7 +8,6 @@ class FileManager {
             if (callback) callback(fileData);
             if (testFlag) return;
             else {
-                console.warn("FileManager:ReadFile:NoCallbackReceived");
                 return fileData;
             }
         } catch (e) {

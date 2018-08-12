@@ -59,7 +59,7 @@ class ExcelImporter {
             if (this.verifyLine(to, index, testFlag))
                 workingProducts.push(to);
             else {
-                console.log("error", index);
+                console.log("Error found: Not including in build: ", to[cellNames.ID] + " " + to [cellNames.Name]);
             }
         })
 
@@ -70,9 +70,8 @@ class ExcelImporter {
         let errorsInLine = 0;
         let keyCells = _.keys(cellNames);
         // Dont verify Image, Description, Quantity
-        let verifyCells = _.without(keyCells, cellNames.Images, cellNames.Description, cellNames.Quantity);
-
-
+        let verifyCells = _.without(keyCells, cellNames.Images, cellNames.Description, cellNames.Quantity, cellNames.FriendlyCategoryName);
+    
         verifyCells.forEach(cellToVerify => {
             if (!tableObjectRow[cellToVerify]) {
                 if (!testFlag) console.error("Error, product in line " + (index + 1) + " has invalid " + cellToVerify);
@@ -81,13 +80,12 @@ class ExcelImporter {
         });
 
         if (!this.verifyLineImage(tableObjectRow, testFlag)) {
-            if (testFlag) console.error("Error, product in line " + (index + 1) + " has invalid Image");
+            if (!testFlag) console.error("Error, product in line " + (index + 1) + " has invalid Image");
             errorsInLine++;
         }
 
         if (tableObjectRow[cellNames.Quantity] === '0'){
-            console.error("Warning, product in line " + (index + 1 ) + " is not in Stock." );
-            errorsInLine++;
+            console.warn("Warning, product in line " + (index + 1 ) + " is not in Stock." );
         }
 
         if (errorsInLine == 0) return true;
@@ -97,11 +95,12 @@ class ExcelImporter {
     }
 
     static verifyLineImage(tableObjectRow, testFlag) {
+        let fs = require('fs')
+
         if (tableObjectRow[cellNames.Images]) {
             let images = ImageHelper.getAllImages(tableObjectRow, true);
             let imagesFound = 0;
             images.forEach((imagePath) => {
-                let fs = require('fs')
                 let fstats = fs.existsSync('.' + imagePath);
                 if (fstats)
                     imagesFound++;

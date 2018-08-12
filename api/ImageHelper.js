@@ -63,11 +63,16 @@ class ImageHelper {
     }
 
     static getCategories(productDataItem){
-        const mainCategory = _.trim(productDataItem[cellNames.Category].split("-")[0]);
-        const sideCategory = _.trim(productDataItem[cellNames.Category].split("-")[1]);
-
+        if (productDataItem[cellNames.FriendlyCategoryName]) {
+            return {
+                mainCategory: _.trim(productDataItem[cellNames.FriendlyCategoryName].split("-")[0]),
+                sideCategory: _.trim(productDataItem[cellNames.FriendlyCategoryName].split("-")[1])
+            }
+        }
+        
         return {
-            mainCategory, sideCategory
+            mainCategory: _.trim(productDataItem[cellNames.Category].split("-")[0]),
+            sideCategory: _.trim(productDataItem[cellNames.Category].split("-")[1])
         }
     }
 }

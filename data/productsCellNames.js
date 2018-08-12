@@ -5,7 +5,8 @@ const cellNames = {
     Price : "Price",
     Quantity : "Quantity",
     Images : "Images",
-    Description : "Description"
+    Description : "Description",
+    FriendlyCategoryName : "FriendlyCategoryName"
 }
 
 export default cellNames;
