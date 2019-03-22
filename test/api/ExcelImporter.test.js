@@ -129,9 +129,7 @@ describe('ExcelImporter', () => {
           }, true);
       });
 
-      it("Should get data from dropbox folder", () => {
-        ExcelImporter.importDropbox(() => console.log("Dropbox imported"));
-      });
+  
 
     });
   })

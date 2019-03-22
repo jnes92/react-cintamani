@@ -1,0 +1,4 @@
+--require @babel/register
+--file mocha.setup.js
+--reporter spec test/ 
+--recursive

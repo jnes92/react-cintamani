@@ -33,12 +33,7 @@ class ExcelImporter {
         return this.verifyCompleteData(tableObjects, testFlag);
     }
 
-    static importDropbox(callback) {
-        FileManager.DownloadFile(this.dbPath, this.dbLocalPath, callback);
-    }
-
     static checkForDuplicates(tableObjects, testFlag) {
-        // check for duplicates.
         let importedRows = tableObjects.length;
         let uniqRows = _.uniqBy(tableObjects, cellNames.ID).length;
         let noDuplicateData = importedRows == uniqRows;

@@ -1,13 +1,27 @@
 {
   "env": {
     "development": {
-      "presets": ["next/babel"]
+      "presets": [
+        "next/babel"
+      ]
     },
     "production": {
-      "presets": ["next/babel"]
+      "presets": [
+        "next/babel"
+      ]
     },
     "test": {
-      "presets": [["next/babel", { "preset-env": { "modules": "commonjs" } }]]
+      "presets": [
+        "@babel/env",
+        [
+          "next/babel",
+          {
+            "preset-env": {
+              "modules": "commonjs"
+            }
+          }
+        ]
+      ]
     }
   }
 }
