@@ -39,7 +39,7 @@ class Category extends React.Component {
                         {filteredProducts ?
                             filteredProducts.map((product, index) => (
                                 <div className="column is-full-mobile is-one-third-tablet is-one-quarter-desktop">
-                                    <ProductItem article={product} />
+                                    <ProductItem key={"productitem_"+index} article={product} />
                                 </div>
                             ))
                             : (<div> Imported dataset is wrong </div>)
