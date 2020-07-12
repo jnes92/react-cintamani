@@ -39,12 +39,13 @@ class FileManager {
         let defaultExt = ".md";
 
         const pageNames = [
-            { data: "agb", name: "AGB´s" }, 
-            { data: "imprint", name: "Impressum" }, //TODO: ADD IMPRINT            
-            { data: "about", name: "Über cintamani-buddhas.de" },             
+            { data: "agb", name: "AGB´s" },
+            { data: "imprint", name: "Impressum" },
+            { data: "about", name: "Über cintamani-buddhas.de" },
+            { data: "payment", name: "Infos zur Bestellung" }
         ];
 
-        let pages =[];
+        let pages = [];
         pageNames.forEach((page) => {
             let url = defaultPath + page.data + defaultExt;
             pages.push({ title: page.name, content: this.ReadFile(url, 'utf8'), path: page.data });
