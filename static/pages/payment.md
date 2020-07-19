@@ -4,6 +4,6 @@ Mit Ihrem Kauf unterstützen Sie Waisenkinder in Nepal und fördern die Erhaltun
 
 Ab einem Bestellwert von 60 Euro ist der Versand kostenlos. Ab dem 1.7.2020 gewähre ich bei Bestellungen über 100 Euro 5% Rabatt.
 
-1. Nachdem Sie einen oder mehrere Artikel angefragt haben,prüfe ich ob der Artikel vorrätig ist.
+1. Nachdem Sie einen oder mehrere Artikel angefragt haben, prüfe ich ob der Artikel vorrätig ist.
 2. Danach schicke ich Ihnen per Mail eine Rechnung zu.
 3. Diese können Sie dann überweisen oder mit Paypal bezahlen.
