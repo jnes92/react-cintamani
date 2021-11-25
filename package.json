@@ -28,7 +28,7 @@
     "react-redux": "^5.0.7",
     "redux": "^3.6.0",
     "redux-thunk": "^2.3.0",
-    "xlsx": "^0.11.10"
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
