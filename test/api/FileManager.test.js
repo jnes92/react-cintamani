@@ -21,7 +21,7 @@ describe('FileManager', () => {
             let firstLineTextAbout = "# Über uns";
             let aboutIndex = 2; // about.md in array["agbs","about"]
             let texts = FileManager.ImportStaticTextFiles();
-            texts.should.have.length(3); 
+            texts.should.have.length(4); 
             let firstLineImported = texts[aboutIndex].content.split("\n")[0];
             expect(firstLineImported).to.include(firstLineTextAbout);
         });
