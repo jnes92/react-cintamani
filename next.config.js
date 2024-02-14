@@ -15,7 +15,7 @@ module.exports = {
       console.log("Error:", e.stack);
     }
   },
-
+  basePath:'/react-cintamani', 
   webpack: (config, { buildId, dev }) => {
     require.extensions[".css"] = () => {
       return;
