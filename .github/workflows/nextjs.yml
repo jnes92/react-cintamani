@@ -98,7 +98,7 @@ jobs:
         uses: ihiroky/extract-action@v1
         with:
           file_path: artifact.tar
-          extract_dir: upload
+          extract_dir: "upload"
       - name: GitHub Deploy to One.com
         uses: rostimelk/one.com-deployer@master
         env:
@@ -106,4 +106,4 @@ jobs:
             ONE_SSH_KEY_PUBLIC: ${{ secrets.CINTAMANI_PUBLIC }}
             ONE_SSH_KEY_PRIVATE: ${{ secrets.CINTAMANI_PRIVATE }}
             TPO_SRC_PATH: "upload"
-            TPO_PATH: ""
+            TPO_PATH: "."
