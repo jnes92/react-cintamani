@@ -8,10 +8,11 @@ class FileManager {
             if (callback) callback(fileData);
             if (testFlag) return;
             else {
+                // console.log("FileMAnager reads file", path)
                 return fileData;
             }
         } catch (e) {
-            errorHandler(e);
+            // errorHandler(e);
             if (testFlag) return;
             console.error(e);
         }
@@ -35,7 +36,7 @@ class FileManager {
     }
 
     static ImportStaticTextFiles() {
-        let defaultPath = "./static/pages/";
+        let defaultPath = "./public/static/pages/";
         let defaultExt = ".md";
 
         const pageNames = [

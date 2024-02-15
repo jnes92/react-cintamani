@@ -5,7 +5,7 @@ import ExcelImporter from "./api/ExcelImporter";
 import RoutesHelper from "./data/routesHelper";
 import FileManager from './api/FileManager';
 
-const initialState = {
+export const initialState = {
     products: [],
     categories: [],
 }
@@ -42,6 +42,7 @@ export const getProducts = (isServer) => dispatch => {
 
 }
 
-export const initStore = (initialState = initialState) => {
+export const initStore = (initialState = {    products: [],
+    categories: []}) => {
     return createStore(reducer, initialState, applyMiddleware(thunkMiddleware))
 }

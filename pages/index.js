@@ -1,11 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getProducts } from "../store";
+import { getProducts, initialState } from "../store";
 import Layout from "../components/MyLayout.js";
 
 class Home extends React.Component {
   static getInitialProps({ store, isServer }) {
+    console.log(store)
     store.dispatch(getProducts(isServer));
+    return initialState
   }
 
   render() {

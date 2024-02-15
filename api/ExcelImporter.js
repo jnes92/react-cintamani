@@ -74,14 +74,14 @@ class ExcelImporter {
             }
         });
 
-        if (!this.verifyLineImage(tableObjectRow, testFlag)) {
-            if (!testFlag) console.error("Error, product in line " + (index + 1) + " has invalid Image");
-            errorsInLine++;
-        }
+        // if (!this.verifyLineImage(tableObjectRow, testFlag)) {
+        //     if (!testFlag) console.error("Error, product in line " + (index + 1) + " has invalid Image");
+        //     errorsInLine++;
+        // }
 
-        if (tableObjectRow[cellNames.Quantity] === '0'){
-            console.warn("Warning, product in line " + (index + 1 ) + " is not in Stock." );
-        }
+        // if (tableObjectRow[cellNames.Quantity] === '0'){
+        //     console.warn("Warning, product in line " + (index + 1 ) + " is not in Stock." );
+        // }
 
         if (errorsInLine == 0) return true;
         else {

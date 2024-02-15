@@ -76,7 +76,8 @@ class Navigation extends Component {
                 <div className="navbar-brand">
                     <Link href={`/`} >
                         <div className="navbar-item" >
-                            <img src="/static/images/logo.png" alt="Cintamani-Buddhas.de" width="180px" />
+                            Cintamani
+                            {/* <img src="/public/static/images/logo.png" alt="Cintamani-Buddhas.de" width="180px" /> */}
                         </div>
                     </Link>
                     <a onClick={this.toggleMenu} role="button"

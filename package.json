@@ -8,10 +8,10 @@
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha",
     "test-vsts": "cross-env NODE_ENV=test ./node_modules/.bin/mocha --recursive --reporter mocha-junit-reporter --reporter-options mochaFile=./test-output/test-results.xml",
-    "dev": "cross-env NODE_ENV=development node server.js",
+    "dev": "cross-env NODE_ENV=development node --openssl-legacy-provider server.js",
     "build": "next build",
     "start": "next start",
-    "export": "next build && next export -o dist"
+    "export": "cross-env NODE_OPTIONS='--openssl-legacy-provider' next build && next export -o dist"
   },
   "dependencies": {
     "bulma": "^0.7.1",
