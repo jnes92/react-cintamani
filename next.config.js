@@ -32,7 +32,13 @@ module.exports = {
       {
         test: /\.css$/,
         use: ["babel-loader", "raw-loader", "postcss-loader"]
-      }
+      },
+      {test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],}
     );
 
     config.plugins.push(

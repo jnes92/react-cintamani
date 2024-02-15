@@ -44,7 +44,7 @@ class ImageHelper {
                 else 
                 imagesLong.push(this.getImagePath(categories.mainCategory, null, shortString));
             }
-            else imagesLong.push('/static/images/products/' + shortString);
+            else imagesLong.push('/public/static/images/products/' + shortString);
             });
 
         
@@ -54,8 +54,8 @@ class ImageHelper {
             let testSide ="Manjusri";
             let testImage="001.jpg";
             let testImage2="002.jpg";
-            fakeImages.push("/static/images/products/" + testMain + "/" + testSide + "/" + testImage);
-            fakeImages.push("/static/images/products/" + testMain + "/" + testSide + "/" + testImage2);
+            fakeImages.push("/public/static/images/products/" + testMain + "/" + testSide + "/" + testImage);
+            fakeImages.push("/public/static/images/products/" + testMain + "/" + testSide + "/" + testImage2);
             return fakeImages;
         }
 

@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { getProducts, initialState } from "../store";
 import Layout from "../components/MyLayout.js";
+import img from "../public/static/images/head1_web.jpg"
 
 class Home extends React.Component {
   static getInitialProps({ store, isServer }) {
@@ -14,10 +15,11 @@ class Home extends React.Component {
     return (
       <div>
         <section
-          className="hero is-fullheight"
+          className="hero is-fullheight style.bg_img"
           style={{
-            background: "url('/static/images/head1_web.jpg') center center",
-            backgroundSize: "cover"
+            background: `url("/static/images/head1_web.jpg") center center`,
+            backgroundSize: "cover",
+            width: "100%"
           }}
         >
           <div className="hero-body">

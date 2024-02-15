@@ -45,7 +45,7 @@ describe('ImageHelper', () => {
             images.should.be.a("array");
             images.should.have.length(3);
 
-            let pathPrefix = "/static/images/products/Buddhas/Aksobhya/";
+            let pathPrefix = "/public/static/images/products/Buddhas/Aksobhya/";
 
             assert.equal(images[0], pathPrefix + "abc.jpg");
             assert.equal(images[1], pathPrefix + "123.png");
