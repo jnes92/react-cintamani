@@ -106,4 +106,21 @@ jobs:
             ONE_SSH_KEY_PUBLIC: ${{ secrets.CINTAMANI_PUBLIC }}
             ONE_SSH_KEY_PRIVATE: ${{ secrets.CINTAMANI_PRIVATE }}
             TPO_SRC_PATH: "./upload/"
-            TPO_PATH: "cintamani-buddhas.de/"
+            # TPO_PATH: ""
+      # - name: Deploy to ONE server
+      #     uses: easingthemes/ssh-deploy@main
+      #     with:
+      #       SSH_PRIVATE_KEY: ${{ secrets.CINTAMANI_PRIVATE }}
+      #       ARGS: "-rlgoDzvc -i"
+      #       SOURCE: "upload/"
+      #       REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+      #       REMOTE_USER: ${{ secrets.REMOTE_USER }}
+      #       TARGET: ${{ secrets.REMOTE_TARGET }}
+      #       EXCLUDE: "/dist/, /node_modules/"
+      #       SCRIPT_BEFORE: |
+      #         whoami
+      #         ls -al
+      #       SCRIPT_AFTER: |
+      #         whoami
+      #         ls -al
+      #         echo $RSYNC_STDOUT
