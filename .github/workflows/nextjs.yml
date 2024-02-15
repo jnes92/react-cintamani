@@ -95,5 +95,5 @@ jobs:
             ONE_DOMAIN_NAME: cintamani-buddhas.de
             ONE_SSH_KEY_PUBLIC: ${{ secrets.CINTAMANI_PUBLIC }}
             ONE_SSH_KEY_PRIVATE: ${{ secrets.CINTAMANI_PRIVATE }}
-            TPO_SRC_PATH: "./out"
+            TPO_SRC_PATH: ""
             TPO_PATH: ""
